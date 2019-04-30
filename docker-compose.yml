@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    tty: true
+    environment:
+      TZ: Azia/Tokyo
+      FLASK_APP: run.py
+      FLASK_ENV: development
+    volumes:
+      - "./src:/src"
+    ports:
+      - "5000:5000"
+    # command: flask run -h 0.0.0.0 # 実際にflaskアプリを作った際に行う
+
+  db:
+    image: mysql:5.7
+    container_name: mysql_host
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_database
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: 'Asia/Tokyo'
+    command: mysqld
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./mysql/sqls:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=mysql_host
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    ports:
+      - 8080:80
