@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import MeCab
+import neologdn
 from pprint import pprint
 
 
@@ -11,9 +12,9 @@ def get_stop_words():
     return stop_words
 
 def analyze_review(review, stop_words):
+    review = neologdn.normalize(review) # 正規化
     node = m.parseToNode(review)
     result = []
-    # 正規化をもう少しやりたい
     while node:
         hinshi = node.feature.split(",")[0]
         if hinshi in ['名詞', '動詞', '形容詞', '感動詞', '副詞']:

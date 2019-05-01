@@ -36,3 +36,4 @@ sqlalchemy_utils
 flask-migrate
 pymysql
 gunicorn
+neologdn
