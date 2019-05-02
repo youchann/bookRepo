@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 base_url = "https://bookmeter.com"
 params_to_search = "&partial=true&sort=recommended&type=japanese&page=1"
 
-keyword = "ノルウェイの森 上 (講談社文庫)"
+keyword = "お金2.0 新しい経済のルールと生き方 (NewsPicks Book)"
 keyword = urllib.parse.quote(keyword)
 
 url_to_get_id = base_url + "/search?keyword=" + keyword + params_to_search
@@ -45,7 +45,7 @@ def get_reviews(path_to_detail):
 
         # resourcesの中でfor文を回す→print
         if json_data['resources']:
-            with open('src/src/samples/sample_reviews.txt', mode='a', encoding='utf-8') as f:
+            with open('/src/src/samples/sample_reviews6.txt', mode='a', encoding='utf-8') as f:
                 for i in json_data['resources']:
                     f.write(i['content_tag'] + "\n")
                 print("書き込み完了, offset:", offset)

@@ -25,8 +25,8 @@ def analyze_review(review, stop_words, tagger):
     while node:
         feature = node.feature.split(",")
         # if feature[0] in ['名詞', '動詞', '形容詞', '感動詞', '副詞'] and not feature[1] in ['固有名詞', '数']:
-        if feature[0] in ['名詞', '形容詞', '感動詞'] and not feature[1] in ['固有名詞', '数']:
-                result.append(node.surface)  # 語幹に変換
+        if feature[0] in ['名詞'] and not feature[1] in ['固有名詞', '数']:
+            result.append(node.surface)  # 語幹に変換
             # result.append(node.feature.split(",")[6]) # そのまま
         node = node.next
 

@@ -1,2 +1,3 @@
 mysql/data
 src/production/__pycache__
+src/production/reviews/*

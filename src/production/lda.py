@@ -24,12 +24,16 @@ def get_lda_model(texts):
     # コーパスを作成 (単語ID・出現頻度をタプル配列で表現したデータのこと)
     corpus = [dictionary.doc2bow(text) for text in texts]
 
+    # コーパスに対してtfidf処理を行う
+    tfidf = gensim.models.TfidfModel(corpus)
+    corpus_tfidf = tfidf[corpus]
+
     # ファイルに保存できる
     # corpora.MmCorpus.serialize('/src/deerwester.mm', corpus)
 
     # LDAモデルを構築
     # num_topic=5で、5個のトピックを持つLDAモデルを作成
-    lda = gensim.models.ldamodel.LdaModel(corpus=corpus, num_topics=5, id2word=dictionary)
+    lda = gensim.models.ldamodel.LdaModel(corpus=corpus_tfidf, num_topics=5, id2word=dictionary)
 
     # トピックは単語・適合度の組み合わせで構築される
     return lda.show_topics()
