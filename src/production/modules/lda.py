@@ -28,6 +28,22 @@ def get_lda_model(texts):
     tfidf = gensim.models.TfidfModel(corpus)
     corpus_tfidf = tfidf[corpus]
 
+
+    # tf-idf値を算出するコード
+    # texts_tfidf = []
+    # for doc in corpus_tfidf:
+    #     text_tfidf = []
+    #     for word in doc:
+    #         text_tfidf.append([dictionary[word[0]],word[1]])
+    #     texts_tfidf.append(text_tfidf)
+    #
+    # for text in texts_tfidf:
+    #     print(text)
+    # exit()
+
+
+
+
     # ファイルに保存できる
     # corpora.MmCorpus.serialize('/src/deerwester.mm', corpus)
 

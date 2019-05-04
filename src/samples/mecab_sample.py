@@ -32,7 +32,7 @@ m.parse("")
 all_reviews_result = []
 
 # テキストファイルを開く(実際は配列にまとまったレビュー群がくるのが理想)
-with open('/src/src/samples/sample_reviews.txt', encoding='utf-8') as fh:
+with open('/src/src/samples/sample_reviews1.txt', encoding='utf-8') as fh:
     stop_words = get_stop_words()
     for line in fh:
         one_review = line.strip()
