@@ -6,5 +6,5 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.6.7 Docker (scraping-python:latest)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.6.7 Docker Compose (api at [/Users/yutaro/projects/python/bookRepo/docker-compose.yml])" project-jdk-type="Python SDK" />
 </project>

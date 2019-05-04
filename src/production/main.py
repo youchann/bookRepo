@@ -1,5 +1,5 @@
 from pprint import pprint
-from modules import analyzes, lda, bookmeters
+from modules import analyzes, lda, books
 
 # for i in range(5):
 #
@@ -13,4 +13,16 @@ from modules import analyzes, lda, bookmeters
 #     pprint(lda_model)
 
 
-bookmeters.get_books()
+books.get_books(False)
+
+# import requests, time
+#
+# url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
+# params = {
+#     'applicationId' : '1006634189914336378',
+#     'title' : "ノルウェイの森 上",
+#     'hits' : '1',
+# }
+#
+# r = requests.get(url, params=params)
+# print(r.json()['Items'][0]['Item']["booksGenreId"])
