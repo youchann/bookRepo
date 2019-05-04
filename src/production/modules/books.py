@@ -11,11 +11,12 @@ def get_books(business_flg):
 
     while True:
         params = get_params(offset)
-        json_data = json_from_request(url, params, cookies)
-
-        book_info = get_book_info_from_json(json_data)
-        print("----------------------------レビュー取得成功----------------------------")
+        print("----------------------------レビュー取得開始----------------------------")
         print("offset :", offset)
+        # レビューのタイムラインから書籍情報を取得
+        json_data = json_from_request(url, params, cookies)
+        book_info = get_book_info_from_json(json_data)
+        print("----------------------------レビュー取得終了----------------------------")
 
         book_info = narrow_books(book_info, business_flg)
 
@@ -50,11 +51,14 @@ def get_book_info_from_json(json):
 
 
 def narrow_books(book_info, business_flg):
-    # 先に楽天apiに問い合わせてスクリーニングする
+    print("----------------------------ジャンル分け開始----------------------------")
+    # ジャンルがビジネスか小説か
     narrowed_book_info = narrow_with_genre(book_info, business_flg)
     print("----------------------------ジャンル分け終了----------------------------")
+    print("----------------------------レビュー数分け開始----------------------------")
+    # レビュー数が1000以上あるか
     narrowed_book_info = judge_having_enough_reviews(narrowed_book_info)
-    print("----------------------------スクリーニング終了----------------------------")
+    print("----------------------------レビュー数分け終了----------------------------")
 
     return narrowed_book_info
 
@@ -68,18 +72,22 @@ def narrow_with_genre(book_info, business_flg):
         params['title'] = info['title']
 
         book_genre = get_book_genre(url, params)
-        print(info, book_genre)
+        print("title :", info['title'], "genre_id :", book_genre)
 
+        if not book_genre:
+            print("--------------------------------------------------")
+            continue
 
         if business_flg and book_genre[:6] == "001006": # ビジネス書
             narrowed_book_info.append(info)
-            print('ビジネス書')
+            print('→ビジネス書')
         elif (not business_flg) and book_genre[:6] == "001004": # 小説
             narrowed_book_info.append(info)
-            print('小説')
+            print('→小説')
         else:
-            print('該当なし')
+            print('→該当なし')
 
+        print("--------------------------------------------------")
         time.sleep(2)
 
     return narrowed_book_info
@@ -98,6 +106,7 @@ def judge_having_enough_reviews(book_info):
         else:
             print("レビュー数1000以下です。")
 
+        print("---------------------------------------------------")
         time.sleep(10)
 
     return narrowed_book_info
@@ -144,7 +153,7 @@ def get_book_genre(url, params):
         if r.json()['Items']: # 該当書籍が存在しない場合false
             book_genre = r.json()['Items'][0]['Item']["booksGenreId"]
             return book_genre
-    return False
+    return None
 
 
 def login():
@@ -165,5 +174,7 @@ def login():
 
     res = s.post('https://bookmeter.com/login', data=payload)
     res.raise_for_status()
+
+    # クッキーからセッションidを取得
     session_id = s.cookies.get('_session_id_elk')
     return session_id

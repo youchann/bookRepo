@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1521abcc-72f0-49ce-874d-0da3d1cfa50c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/bookRepo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/bookRepo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/production/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/production/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/production/modules/bookmeters.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/production/modules/books.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/production/modules/books.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/production/modules/books.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,8 +24,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/production/modules/books.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="816">
+              <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -92,6 +91,7 @@
       <find>business_flg</find>
       <find>print</find>
       <find>narrow_books</find>
+      <find>False</find>
     </findStrings>
     <replaceStrings>
       <replace>get_reviews</replace>
@@ -165,13 +165,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="production" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="bookRepo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookRepo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -223,16 +216,15 @@
       <option name="presentableId" value="Default" />
       <updated>1556151195506</updated>
       <workItem from="1556151199958" duration="587000" />
-      <workItem from="1556152004341" duration="94401000" />
+      <workItem from="1556152004341" duration="96609000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94988000" />
+    <option name="totallyTimeSpent" value="97196000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1454" height="877" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15084986" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -487,8 +479,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/production/modules/books.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="816">
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
