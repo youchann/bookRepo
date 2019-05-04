@@ -37,3 +37,4 @@ flask-migrate
 pymysql
 gunicorn
 neologdn
+retry
