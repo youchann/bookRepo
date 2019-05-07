@@ -2,8 +2,9 @@ from bs4 import BeautifulSoup
 import requests, time
 
 import modules.config as config
+import modules.db as db
 
-def get_books(business_flg):
+def get_books():
     url = "https://bookmeter.com/reviews.json"
     session_id = login()
     cookies = dict(_session_id_elk=session_id)
@@ -18,7 +19,8 @@ def get_books(business_flg):
         book_info = get_book_info_from_json(json_data)
         print("----------------------------レビュー取得終了----------------------------")
 
-        book_info = narrow_books(book_info, business_flg)
+        book_info = narrow_books(book_info)
+        db.insert_book_info(book_info)
 
         if offset > 60:
             break
@@ -50,10 +52,10 @@ def get_book_info_from_json(json):
     return book_info
 
 
-def narrow_books(book_info, business_flg):
+def narrow_books(book_info):
     print("----------------------------ジャンル分け開始----------------------------")
     # ジャンルがビジネスか小説か
-    narrowed_book_info = narrow_with_genre(book_info, business_flg)
+    narrowed_book_info = narrow_with_genre(book_info)
     print("----------------------------ジャンル分け終了----------------------------")
     print("----------------------------レビュー数分け開始----------------------------")
     # レビュー数が1000以上あるか
@@ -63,7 +65,7 @@ def narrow_books(book_info, business_flg):
     return narrowed_book_info
 
 
-def narrow_with_genre(book_info, business_flg):
+def narrow_with_genre(book_info):
     narrowed_book_info = []
     url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
     params = { 'applicationId': config.RAKUTEN_APPLICATION_ID, 'hits': '1' }
@@ -78,10 +80,12 @@ def narrow_with_genre(book_info, business_flg):
             print("--------------------------------------------------")
             continue
 
-        if business_flg and book_genre[:6] == "001006": # ビジネス書
+        if book_genre[:6] == "001006": # ビジネス書
+            info['business_flg'] = True
             narrowed_book_info.append(info)
             print('→ビジネス書')
-        elif (not business_flg) and book_genre[:6] == "001004": # 小説
+        elif book_genre[:6] == "001004": # 小説
+            info['business_flg'] = False
             narrowed_book_info.append(info)
             print('→小説')
         else:
@@ -96,15 +100,15 @@ def narrow_with_genre(book_info, business_flg):
 def judge_having_enough_reviews(book_info):
     narrowed_book_info = []
     for info in book_info:
-        url = "https://bookmeter.com/books/" + str(info['book_id']) + "/reviews.json?review_filter=none&offset=1000&limit=1"
+        url = "https://bookmeter.com/books/" + str(info['book_id']) + "/reviews.json?review_filter=none&offset500&limit=1"
         json_data = json_from_request(url)
         print(info)
 
-        if json_data['resources']: # 1000番目以降にレビューが存在するか
+        if json_data['resources']: # 500番目以降にレビューが存在するか
             narrowed_book_info.append(info)
-            print("レビュー数1000以上あります！！！！！")
+            print("レビュー数500以上あります！！！！！")
         else:
-            print("レビュー数1000以下です。")
+            print("レビュー数500以下です。")
 
         print("---------------------------------------------------")
         time.sleep(10)
@@ -149,8 +153,8 @@ def get_book_genre(url, params):
 
         time.sleep(fail_count * 10)
 
-    if 'Items' in r.json(): # errorの場合False
-        if r.json()['Items']: # 該当書籍が存在しない場合false
+    if 'Items' in r.json(): # errorの場合None
+        if r.json()['Items']: # 該当書籍が存在しない場合None
             book_genre = r.json()['Items'][0]['Item']["booksGenreId"]
             return book_genre
     return None

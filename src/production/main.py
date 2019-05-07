@@ -13,7 +13,7 @@ from modules import analyzes, lda, books
 #     pprint(lda_model)
 
 
-books.get_books(False)
+books.get_books()
 
 # import requests, time
 #

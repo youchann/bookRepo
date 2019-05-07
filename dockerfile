@@ -10,7 +10,8 @@ RUN apt-get update \
   && apt-get install -y xz-utils \
   && apt-get install -y file \
   && apt-get install -y sudo \
-  && apt-get install -y wget
+  && apt-get install -y wget \
+  && apt-get install -y libmysqlclient-dev
 
 RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git\
     && cd mecab-ipadic-neologd\
