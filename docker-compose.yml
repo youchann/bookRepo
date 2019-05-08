@@ -2,7 +2,7 @@ version: '3'
 
 services:
   api:
-    build: .
+    build: src/.
     tty: true
     environment:
       TZ: Azia/Tokyo
@@ -13,6 +13,16 @@ services:
     ports:
       - "5000:5000"
     # command: flask run -h 0.0.0.0 # 実際にflaskアプリを作った際に行う
+
+  batch:
+    build: batch/.
+    tty: true
+    environment:
+      TZ: Azia/Tokyo
+    volumes:
+      - "./batch:/src"
+    ports:
+      - "5050:5050"
 
   db:
     image: mysql:5.7

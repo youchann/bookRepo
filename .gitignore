@@ -3,3 +3,4 @@ src/production/__pycache__
 src/production/modules/__pycache__
 src/production/modules/config.py
 src/production/reviews/*
+batch/production/modules/__pycache__
