@@ -1,5 +1,5 @@
 from pprint import pprint
-from modules import analyzes, lda, books
+from modules import analyzes, lda, books, books_rakuten
 
 # for i in range(5):
 #
@@ -13,7 +13,8 @@ from modules import analyzes, lda, books
 #     pprint(lda_model)
 
 
-books.get_books()
+# books.get_books_from_bookmeter()
+books_rakuten.get_books_from_rakuten()
 
 # import requests, time
 #

@@ -4,14 +4,14 @@ import requests, time
 import modules.config as config
 import modules.db as db
 
-def get_books():
+def get_books_from_bookmeter():
     url = "https://bookmeter.com/reviews.json"
     session_id = login()
     cookies = dict(_session_id_elk=session_id)
-    offset = 0
+    offset = 850
 
     while True:
-        params = get_params(offset)
+        params = {'offset': str(offset), 'limit': '20'}
         print("----------------------------レビュー取得開始----------------------------")
         print("offset :", offset)
         # レビューのタイムラインから書籍情報を取得
@@ -27,14 +27,6 @@ def get_books():
         else:
             offset += 50 # レビューの投稿頻度が意外と多い為
             time.sleep(5)
-
-
-def get_params(offset = 0):
-    params = {
-        'offset': str(offset),
-        'limit': '20'
-    }
-    return params
 
 
 def get_book_info_from_json(json):
