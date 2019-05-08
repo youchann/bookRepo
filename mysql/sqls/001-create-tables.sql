@@ -31,7 +31,7 @@ DROP TABLE IF EXISTS `books`;
 create table IF not exists `books`
 (
  `id`               INT(15) NOT NULL,
- `isbn`             INT(13) NOT NULL,
+ `isbn`             VARCHAR(13) NOT NULL,
  `name`             VARCHAR(100) NOT NULL,
  `business_flg`     BOOLEAN NOT NULL,
   PRIMARY KEY (`id`)
@@ -40,9 +40,8 @@ create table IF not exists `books`
 
 
 ---- drop ----
-DROP TABLE IF EXISTS `book_genres`;
+-- DROP TABLE IF EXISTS `book_genres`;
 ---- drop ----
-DROP TABLE IF EXISTS `topic_terms`;
 
 ---- create ----
 -- create table IF not exists `book_genres`

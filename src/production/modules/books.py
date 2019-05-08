@@ -22,10 +22,10 @@ def get_books():
         book_info = narrow_books(book_info)
         db.insert_book_info(book_info)
 
-        if offset > 60:
+        if db.has_enough_data("novel"):
             break
         else:
-            offset += 30 # レビューの投稿頻度が意外と多い為
+            offset += 50 # レビューの投稿頻度が意外と多い為
             time.sleep(5)
 
 
@@ -45,7 +45,7 @@ def get_book_info_from_json(json):
             title = title[:title.rfind('(')-1] # 出版社名を除く
 
         book_info.append({
-            'book_id' : i['contents']['book']['id'],
+            'book_id' : int(i['contents']['book']['id']),
             'title' : title,
         })
 
@@ -72,19 +72,22 @@ def narrow_with_genre(book_info):
 
     for info in book_info:
         params['title'] = info['title']
+        book_genre_and_isbn = {}
+        book_genre_and_isbn = get_book_genre_and_isbn(url, params)
 
-        book_genre = get_book_genre(url, params)
-        print("title :", info['title'], "genre_id :", book_genre)
-
-        if not book_genre:
+        if not book_genre_and_isbn:
             print("--------------------------------------------------")
             continue
+        else:
+            print("title :", info['title'], "genre_id :", book_genre_and_isbn["genre"], "isbn :",
+                  book_genre_and_isbn["isbn"])
+            info['isbn'] = book_genre_and_isbn['isbn']
 
-        if book_genre[:6] == "001006": # ビジネス書
+        if book_genre_and_isbn["genre"][:6] == "001006": # ビジネス書
             info['business_flg'] = True
             narrowed_book_info.append(info)
             print('→ビジネス書')
-        elif book_genre[:6] == "001004": # 小説
+        elif book_genre_and_isbn["genre"][:6] == "001004": # 小説
             info['business_flg'] = False
             narrowed_book_info.append(info)
             print('→小説')
@@ -100,11 +103,11 @@ def narrow_with_genre(book_info):
 def judge_having_enough_reviews(book_info):
     narrowed_book_info = []
     for info in book_info:
-        url = "https://bookmeter.com/books/" + str(info['book_id']) + "/reviews.json?review_filter=none&offset500&limit=1"
+        url = "https://bookmeter.com/books/" + str(info['book_id']) + "/reviews.json?review_filter=none&offset0&limit=1"
         json_data = json_from_request(url)
         print(info)
 
-        if json_data['resources']: # 500番目以降にレビューが存在するか
+        if json_data['metadata']['count'] >= 500:
             narrowed_book_info.append(info)
             print("レビュー数500以上あります！！！！！")
         else:
@@ -136,7 +139,7 @@ def json_from_request(url, params = None, cookies = None):
     return r.json()
 
 # 楽天へのリクエストは別メソッドで定義
-def get_book_genre(url, params):
+def get_book_genre_and_isbn(url, params):
     fail_count = 0
 
     while True:
@@ -155,8 +158,11 @@ def get_book_genre(url, params):
 
     if 'Items' in r.json(): # errorの場合None
         if r.json()['Items']: # 該当書籍が存在しない場合None
-            book_genre = r.json()['Items'][0]['Item']["booksGenreId"]
-            return book_genre
+            info = {
+                'genre': r.json()['Items'][0]['Item']["booksGenreId"],
+                'isbn': r.json()['Items'][0]['Item']["isbn"],
+            }
+            return info
     return None
 
 
