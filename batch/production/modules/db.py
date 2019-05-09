@@ -16,11 +16,19 @@ def get_engine():
     return engine
 
 
+def get_book_ids():
+    engine = get_engine()
+    result = engine.execute('SELECT `id` FROM `books`')
+
+    return result
+
+
 def insert_book_info(book_info):
     engine = get_engine()
     sql = 'INSERT IGNORE INTO `books` (`id`, `isbn`, `name`, `business_flg`) VALUES (%s, %s, %s, %s)'
     for info in book_info:
         engine.execute(sql, [info['book_id'], info['isbn'], info['title'], info['business_flg']])
+
 
 def has_enough_data(genre = None):
     engine = get_engine()

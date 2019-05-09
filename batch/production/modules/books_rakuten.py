@@ -8,7 +8,7 @@ import modules.db as db
 
 def get_books_from_rakuten():# 楽天のランキング経由で取得
     # booksGenreId = 001006 & sort = reviewCount & page = 2 & applicationId = 1006634189914336378
-    page = 1
+    page = 9
     while True:
         book_info = []
         book_info = get_book_info(page)
@@ -48,6 +48,7 @@ def narrow_books(book_info):
         print(book_id)
         if book_id:
             i['book_id'] = book_id
+            i['business_flg'] = True
             narrowed_book_info.append(i)
         time.sleep(5)
     print("----------------------------book_id取得終了----------------------------")
