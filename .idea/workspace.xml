@@ -2,10 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1521abcc-72f0-49ce-874d-0da3d1cfa50c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/batch/production/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/batch/production/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/batch/production/modules/analyzes.py" beforeDir="false" afterPath="$PROJECT_DIR$/batch/production/modules/analyzes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/batch/production/modules/books.py" beforeDir="false" afterPath="$PROJECT_DIR$/batch/production/modules/books.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/batch/production/modules/books_rakuten.py" beforeDir="false" afterPath="$PROJECT_DIR$/batch/production/modules/books_rakuten.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/batch/production/modules/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/batch/production/modules/db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/batch/production/modules/lda.py" beforeDir="false" afterPath="$PROJECT_DIR$/batch/production/modules/lda.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/batch/production/modules/scraping.py" beforeDir="false" afterPath="$PROJECT_DIR$/batch/production/modules/scraping.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/batch/production/reviews/sample_reviews1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/batch/production/reviews/sample_reviews2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/batch/production/reviews/sample_reviews3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/batch/production/reviews/sample_reviews4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/batch/production/reviews/sample_reviews5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/batch/production/reviews/sample_reviews6.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,8 +43,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/batch/production/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="510">
+              <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -42,12 +53,33 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/batch/production/modules/analyzes.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="629">
+              <caret line="37" column="25" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
+              <folding>
+                <element signature="e#25#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/batch/production/modules/books_rakuten.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+            <state relative-caret-position="-163">
+              <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
+                <element signature="e#0#11#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -56,8 +88,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/batch/production/modules/books.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="678">
-              <caret line="113" column="21" selection-start-line="113" selection-start-column="4" selection-end-line="113" selection-end-column="21" />
+            <state relative-caret-position="238">
+              <caret line="14" column="43" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="43" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -68,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/batch/production/modules/scraping.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="29" column="15" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="15" />
+            <state relative-caret-position="211">
+              <caret line="41" column="55" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
               <folding>
                 <element signature="e#25#60#0" expanded="true" />
               </folding>
@@ -80,10 +112,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/batch/production/modules/db.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+            <state relative-caret-position="493">
+              <caret line="29" column="93" selection-start-line="29" selection-start-column="81" selection-end-line="29" selection-end-column="93" />
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/batch/production/modules/lda.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="54" column="42" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -165,12 +209,14 @@
         <option value="$PROJECT_DIR$/src/requirements.txt" />
         <option value="$PROJECT_DIR$/batch/dockerfile" />
         <option value="$PROJECT_DIR$/batch/requirements.txt" />
-        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/batch/production/modules/analyzes.py" />
+        <option value="$PROJECT_DIR$/batch/production/modules/lda.py" />
+        <option value="$PROJECT_DIR$/batch/production/modules/db.py" />
+        <option value="$PROJECT_DIR$/batch/production/modules/books_rakuten.py" />
         <option value="$PROJECT_DIR$/batch/production/modules/books.py" />
         <option value="$PROJECT_DIR$/batch/production/modules/scraping.py" />
         <option value="$PROJECT_DIR$/batch/production/main.py" />
-        <option value="$PROJECT_DIR$/batch/production/modules/db.py" />
-        <option value="$PROJECT_DIR$/batch/production/modules/books_rakuten.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -210,11 +256,6 @@
               <item name="bookRepo" type="462c0819:PsiDirectoryNode" />
               <item name="batch" type="462c0819:PsiDirectoryNode" />
               <item name="samples" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bookRepo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookRepo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -270,12 +311,12 @@
       <updated>1556151195506</updated>
       <workItem from="1556151199958" duration="587000" />
       <workItem from="1556152004341" duration="101732000" />
-      <workItem from="1557194460603" duration="43546000" />
+      <workItem from="1557194460603" duration="62624000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="145865000" />
+    <option name="totallyTimeSpent" value="164943000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -335,13 +376,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/samples/sample_reviews.txt" />
-    <entry file="file://$PROJECT_DIR$/batch/samples/nlp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="13" selection-start-line="1" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/samples/sample_reviews2.txt" />
     <entry file="file://$PROJECT_DIR$/src/samples/sample_reviews3.txt" />
     <entry file="file://$PROJECT_DIR$/src/samples/sample_reviews4.txt" />
@@ -395,26 +429,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cookie.txt" />
-    <entry file="file://$PROJECT_DIR$/batch/production/modules/analyzes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
-          <folding>
-            <element signature="e#25#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/batch/production/modules/lda.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="51" column="75" selection-start-line="51" selection-start-column="75" selection-end-line="51" selection-end-column="75" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/batch/production/modules/config.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -471,13 +485,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="36" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/batch/samples/scraping.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="552">
@@ -502,30 +509,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/batch/production/modules/scraping.py">
+    <entry file="file://$PROJECT_DIR$/batch/samples/nlp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="29" column="15" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="15" />
+        <state relative-caret-position="17">
+          <caret line="1" column="13" selection-start-line="1" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/batch/production/modules/lda.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="54" column="42" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="42" />
           <folding>
-            <element signature="e#25#60#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/batch/production/main.py">
+    <entry file="file://$PROJECT_DIR$/batch/production/modules/analyzes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="629">
+          <caret line="37" column="25" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#25#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/batch/production/modules/books_rakuten.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-163">
+          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/batch/production/reviews/9816024.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/batch/production/modules/books.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="678">
-          <caret line="113" column="21" selection-start-line="113" selection-start-column="4" selection-end-line="113" selection-end-column="21" />
+        <state relative-caret-position="238">
+          <caret line="14" column="43" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="43" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
@@ -534,21 +561,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/batch/production/modules/db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+        <state relative-caret-position="493">
+          <caret line="29" column="93" selection-start-line="29" selection-start-column="81" selection-end-line="29" selection-end-column="93" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/batch/production/modules/books_rakuten.py">
+    <entry file="file://$PROJECT_DIR$/batch/production/modules/scraping.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+        <state relative-caret-position="211">
+          <caret line="41" column="55" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#25#60#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/batch/production/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
         </state>
       </provider>
     </entry>

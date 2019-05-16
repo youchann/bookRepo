@@ -48,3 +48,12 @@ def has_enough_data(genre = None):
         return True
     else:
         return False
+
+
+def get_word_id_from_model(lda_topics):
+    word_ids = []
+    engine = get_engine()
+    for topic in lda_topics:
+        for word in topic[1]:
+            print(word[0])
+            # 存在しないなら挿入、していてもidは取得

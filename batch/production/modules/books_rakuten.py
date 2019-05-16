@@ -8,7 +8,7 @@ import modules.db as db
 
 def get_books_from_rakuten():# 楽天のランキング経由で取得
     # booksGenreId = 001006 & sort = reviewCount & page = 2 & applicationId = 1006634189914336378
-    page = 9
+    page = 1
     while True:
         book_info = []
         book_info = get_book_info(page)
@@ -27,7 +27,7 @@ def get_book_info(page):# jsonデータを整形
     print("page :", page)
     book_info = []
     url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
-    params = {'applicationId': config.RAKUTEN_APPLICATION_ID, 'booksGenreId': '001006', 'sort': 'reviewCount'}# ビジネスジャンル
+    params = {'applicationId': config.RAKUTEN_APPLICATION_ID, 'booksGenreId': '001006', 'sort': 'sales'}# ビジネスジャンル
     params['page'] = str(page)
 
     json_data = books.json_from_request(url, params)
@@ -50,7 +50,7 @@ def narrow_books(book_info):
             i['book_id'] = book_id
             i['business_flg'] = True
             narrowed_book_info.append(i)
-        time.sleep(5)
+        time.sleep(1)
     print("----------------------------book_id取得終了----------------------------")
     print("----------------------------レビュー数ソート開始----------------------------")
     narrowed_book_info = books.judge_having_enough_reviews(narrowed_book_info)

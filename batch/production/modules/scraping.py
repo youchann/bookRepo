@@ -27,7 +27,19 @@ def get_book_id_from_isbn(isbn):
         return None
 
 
+# def get_book_name_from_id(book_id):
+#     base_url = "https://bookmeter.com/books/"
+#     url_to_get_name = base_url + str(book_id)
+#     f = urllib.request.urlopen(url_to_get_name)
+#     html = f.read().decode("utf-8")
+#
+#     soup = BeautifulSoup(html, "html.parser")
+
+
+
+
 def get_reviews(book_id):
+    print("----------------------------取得開始(" + book_id + ")----------------------------")
     url = "https://bookmeter.com/books/" + str(book_id) + "/reviews.json"
     params = {'review_filter': 'none', 'limit': '100'}
     offset = 0
@@ -50,5 +62,5 @@ def get_reviews(book_id):
             offset += 100
             time.sleep(10)
         else:
-            print('取得終了')
+            print('----------------------------取得終了----------------------------')
             break

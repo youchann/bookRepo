@@ -52,7 +52,7 @@ def get_lda_model(texts):
     lda = gensim.models.ldamodel.LdaModel(corpus=corpus_tfidf, num_topics=5, id2word=dictionary)
 
     # トピックは単語・適合度の組み合わせで構築される
-    return lda.show_topics()
+    return lda.show_topics(formatted=False)
     # pprint(lda.show_topic(0))
     # pprint(lda.show_topics())
     # [(0,

@@ -8,7 +8,7 @@ def get_books_from_bookmeter():
     url = "https://bookmeter.com/reviews.json"
     session_id = login()
     cookies = dict(_session_id_elk=session_id)
-    offset = 850
+    offset = 33050
 
     while True:
         params = {'offset': str(offset), 'limit': '20'}
@@ -22,12 +22,33 @@ def get_books_from_bookmeter():
         book_info = narrow_books(book_info)
         db.insert_book_info(book_info)
 
-        if db.has_enough_data("novel"):
+        if db.has_enough_data("business"):
             break
         else:
             offset += 50 # レビューの投稿頻度が意外と多い為
             time.sleep(5)
 
+
+def get_book_from_input():
+    print("book_id: ")
+    book_id = input()
+    print("book_name: ")
+    book_name = input()
+
+    book_info = [{'book_id': int(book_id), 'title': str(book_name), 'business_flg': True}]
+    book_info = get_isbn(book_info)
+    # book_info = narrow_books(book_info)
+    db.insert_book_info(book_info)
+
+
+def get_isbn(book_info):
+    url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
+    params = {'applicationId': config.RAKUTEN_APPLICATION_ID, 'hits': '1'}
+    for info in book_info:
+        params['title'] = info['title']
+        book_genre_and_isbn = get_book_genre_and_isbn(url, params)
+        info['isbn'] = book_genre_and_isbn['isbn']
+    return book_info
 
 def get_book_info_from_json(json):
     book_info = []
@@ -79,10 +100,10 @@ def narrow_with_genre(book_info):
             info['business_flg'] = True
             narrowed_book_info.append(info)
             print('→ビジネス書')
-        elif book_genre_and_isbn["genre"][:6] == "001004": # 小説
-            info['business_flg'] = False
-            narrowed_book_info.append(info)
-            print('→小説')
+        # elif book_genre_and_isbn["genre"][:6] == "001004": # 小説
+        #     info['business_flg'] = False
+        #     narrowed_book_info.append(info)
+        #     print('→小説')
         else:
             print('→該当なし')
 
@@ -99,11 +120,11 @@ def judge_having_enough_reviews(book_info):
         json_data = json_from_request(url)
         print(info)
 
-        if json_data['metadata']['count'] >= 500:
+        if json_data['metadata']['count'] >= 300:
             narrowed_book_info.append(info)
-            print("レビュー数500以上あります！！！！！")
+            print("レビュー数300以上あります！！！！！")
         else:
-            print("レビュー数500以下です。")
+            print("レビュー数300以下です。")
 
         print("---------------------------------------------------")
         time.sleep(10)

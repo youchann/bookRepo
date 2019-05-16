@@ -26,7 +26,7 @@ def analyze_review(review, stop_words, tagger):
         feature = node.feature.split(",")
         # if feature[0] in ['名詞', '動詞', '形容詞', '感動詞', '副詞'] and not feature[1] in ['固有名詞', '数']:
         # if feature[0] in ['名詞'] and not feature[1] in ['固有名詞', '数']:
-        if feature[0] in ['形容詞'] and not feature[1] in ['固有名詞', '数']:
+        if feature[0] in ['形容詞']:
         #     result.append(node.surface)  # そのまま
             result.append(node.feature.split(",")[6]) # 語幹に変換
         node = node.next
@@ -35,21 +35,7 @@ def analyze_review(review, stop_words, tagger):
     return result
 
 def get_stop_words():
-    with open('/src/src/production/Japanese.txt', encoding='utf-8') as fd:
+    with open('/src/batch/production/Japanese.txt', encoding='utf-8') as fd:
         words = fd.read().splitlines()
         stop_words = frozenset(words)
     return stop_words
-
-
-# LDAを構築したい
-# →品詞選定
-# →辞書使えているか確認
-# →ストップワードを定義
-# →分割した配列にする
-# →サンプルになぞってndaを構築
-# →各トピックの頻度を取得
-# DB保存までを行う
-
-# あとはid5個連続で解析できれば問題なし
-# ジャンルを求めるフローを確立
-# 大量のidを取得する
