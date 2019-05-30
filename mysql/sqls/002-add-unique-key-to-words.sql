@@ -1,0 +1,1 @@
+ ALTER TABLE words ADD UNIQUE unique_word (word);
