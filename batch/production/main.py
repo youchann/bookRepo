@@ -26,15 +26,34 @@ from modules import analyzes, lda, books, books_rakuten, db, scraping
 #     books.get_book_from_input()
 
 # レビューを取得してくれるやつ
-book_ids = db.get_book_ids()
-for id in book_ids:
-    scraping.get_reviews(str(id[0]))
-
-# レビューを分析してくれるやつ
 # book_ids = db.get_book_ids()
 # for id in book_ids:
-#     print(id)
-#     file_path = '/src/production/reviews/' + str(id) + '.txt'
-#     analyzed_reviews = analyzes.analyze_from_file(file_path)
-#     lda_model = lda.get_lda_model(analyzed_reviews)
-#     pprint(lda_model)
+#     scraping.get_reviews(str(id[0]))
+
+# db.test_execute()
+# exit()
+
+# レビューを分析してくれるやつ(仮)
+# file_path = '/src/production/reviews/' + "32" + '.txt'
+# analyzed_reviews = analyzes.analyze_from_file(file_path, False) # 名詞
+# lda_model = lda.get_lda_model(analyzed_reviews)
+
+# analyzed_reviews_adjective = analyzes.analyze_from_file(file_path, True) # 形容詞
+# lda_model_adjective = lda.get_lda_model(analyzed_reviews_adjective)
+#
+# pprint(lda_model_adjective)
+# db.stock_topics(lda_model_adjective, 32, True)
+
+
+# レビューを分析してくれるやつ
+book_ids = db.get_book_ids()
+for id in book_ids:
+    print(id[0])
+    file_path = '/src/production/reviews/' + str(id[0]) + '.txt'
+    analyzed_reviews = analyzes.analyze_from_file(file_path, False) # 名詞
+    analyzed_reviews_adjective = analyzes.analyze_from_file(file_path, True) # 形容詞
+    lda_model = lda.get_lda_model(analyzed_reviews)
+    lda_model_adjective = lda.get_lda_model(analyzed_reviews_adjective)
+    db.stock_topics(lda_model, int(id[0]), False)
+    db.stock_topics(lda_model, int(id[0]), True)
+    print(id[0], "が終わりました-------------------------------------------------------------------------")

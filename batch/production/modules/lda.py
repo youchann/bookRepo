@@ -51,6 +51,11 @@ def get_lda_model(texts):
     # num_topic=5で、5個のトピックを持つLDAモデルを作成
     lda = gensim.models.ldamodel.LdaModel(corpus=corpus_tfidf, num_topics=5, id2word=dictionary)
 
+    del tfidf
+    del corpus_tfidf
+    del dictionary
+    del texts
+    del frequency
     # トピックは単語・適合度の組み合わせで構築される
     return lda.show_topics(formatted=False)
     # pprint(lda.show_topic(0))
