@@ -5,3 +5,5 @@ src/production/modules/config.py
 src/production/reviews/*
 batch/production/modules/__pycache__
 batch/production/reviews
+src/api/__pycache__
+src/__pycache__
