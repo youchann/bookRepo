@@ -20,3 +20,5 @@ def get_similar_words(word_list):
     ex = engine.execute(sql, word_list)
     for row in ex:
         word_id.append(row[0])
+
+
