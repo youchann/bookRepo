@@ -1,4 +1,6 @@
 mysql/data
+mysql/wnjpn.db
+mysql/sqls/wnjpn.mysql.dump
 src/production/__pycache__
 src/production/modules/__pycache__
 src/production/modules/config.py
@@ -6,4 +8,5 @@ src/production/reviews/*
 batch/production/modules/__pycache__
 batch/production/reviews
 src/api/__pycache__
+src/api/modules/__pycache__
 src/__pycache__

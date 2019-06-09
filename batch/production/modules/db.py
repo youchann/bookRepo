@@ -1,5 +1,4 @@
 import sqlalchemy
-import sqlalchemy.orm
 from pprint import pprint
 
 

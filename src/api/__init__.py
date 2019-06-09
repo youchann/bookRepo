@@ -8,3 +8,4 @@ app.config['JSON_AS_ASCII'] = False
 # db = SQLAlchemy(app)
 
 import api.views
+import api.models

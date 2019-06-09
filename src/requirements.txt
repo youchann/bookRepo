@@ -11,6 +11,7 @@ MarkupSafe==1.1.1
 marshmallow==2.19.2
 marshmallow-sqlalchemy==0.16.3
 mecab-python3==0.996.2
+neologdn==0.4
 PyMySQL==0.9.3
 pytz==2019.1
 six==1.12.0
