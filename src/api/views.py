@@ -9,5 +9,6 @@ def index():
     similar_word_list = models.get_similar_words(word_list["adjective"])
 
     return jsonify({
-        "message": word_list
+        "analyzed_keywords": word_list,
+        "similar_words": similar_word_list,
     })
