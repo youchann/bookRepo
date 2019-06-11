@@ -3,7 +3,7 @@
 import MeCab
 import neologdn
 
-def analyze_from_file(file_path, adjective_flg=False):
+def analyze_from_file(file_path, adjective_flg):
     tagger = MeCab.Tagger("-d /usr/lib/mecab/dic/mecab-ipadic-neologd")
     tagger.parse("")
 

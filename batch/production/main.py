@@ -55,5 +55,5 @@ for id in book_ids:
     lda_model = lda.get_lda_model(analyzed_reviews)
     lda_model_adjective = lda.get_lda_model(analyzed_reviews_adjective)
     db.stock_topics(lda_model, int(id[0]), False)
-    db.stock_topics(lda_model, int(id[0]), True)
+    db.stock_topics(lda_model_adjective, int(id[0]), True)
     print(id[0], "が終わりました-------------------------------------------------------------------------")

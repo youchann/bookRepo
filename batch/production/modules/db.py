@@ -16,8 +16,8 @@ def get_engine():
 
 def get_book_ids():
     engine = get_engine()
-    # result = engine.execute('SELECT `id` FROM `books`')
-    result = engine.execute('SELECT `id` FROM `books` WHERE `id` >= 9816024')
+    result = engine.execute('SELECT `id` FROM `books`')
+    # result = engine.execute('SELECT `id` FROM `books` WHERE `id` >= 9816024')
 
     return result
 
@@ -49,7 +49,7 @@ def has_enough_data(genre = None):
         return False
 
 
-def stock_topics(lda_model, book_id, adjective_flg=False):
+def stock_topics(lda_model, book_id, adjective_flg):
     topics_with_id = []
 
     # 単語をidに変換
