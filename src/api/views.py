@@ -34,6 +34,7 @@ def show_adjective_topics():
         "adjective_topics": adjective_topics
     })
 
+
 @app.route('/show_noun_topics', methods=['POST'])
 def show_noun_topics():
     # 想定しているJSON
@@ -44,9 +45,7 @@ def show_noun_topics():
         print(request.headers['Content-Type'])
         return jsonify(res='error'), 400
 
-    data_json = nlp.separate_selected_keywords(request.json)
-
-    noun_topics = models.get_adjective_topics(data_json['noun'], data_json['adjective'])
+    noun_topics = models.get_noun_topics(request.json['book_ids'])
 
     return jsonify({
         "noun_topics": noun_topics

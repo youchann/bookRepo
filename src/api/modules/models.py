@@ -89,6 +89,33 @@ def get_adjective_topics(noun, adjective):
     return adjective_topics
 
 
+def get_noun_topics(book_ids):
+    engine = get_engine()
+
+    # 名詞トピック群を抽出する
+    sql = "SELECT `topics`.`id`,`topics`.`book_id`, `words`.`word` FROM `topics` " \
+          "INNER JOIN `topic_words` ON `topics`.`id` = `topic_words`.`topic_id` " \
+          "INNER JOIN `words` ON `topic_words`.`word_id` = `words`.`id` " \
+          "WHERE `topics`.`book_id` IN (" + ("%s," * (len(book_ids)))[:-1] + ") " \
+          "AND `topics`.`adjective_flg` = 0"
+    ex = engine.execute(sql, book_ids)
+
+    noun_topics = []
+    count = 0
+    topic_words = []
+    for row in ex:
+        topic_words.append(row[2])
+        count += 1
+
+        if count == 10:
+            noun_topics.append([row[1], topic_words])
+            topic_words = []
+            count = 0
+
+    return noun_topics
+
+
+
 def get_topic_ids_from_words(words):
     topic_ids = []
     engine = get_engine()
