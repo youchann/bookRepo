@@ -51,3 +51,20 @@ def show_noun_topics():
         "noun_topics": noun_topics
     })
 
+
+@app.route('/get_isbn_from_book_ids', methods=['POST'])
+def get_isbn_from_book_ids():
+    # 想定しているJSON
+    # {
+    #     "book_ids": [1231412412,1241421,12113413,423412413],
+    # }
+    if request.headers['Content-Type'] != 'application/json':
+        print(request.headers['Content-Type'])
+        return jsonify(res='error'), 400
+
+    isbn_list = models.get_isbn_from_book_ids(request.json['book_ids'])
+
+    return jsonify({
+        "isbn_list": isbn_list
+    })
+

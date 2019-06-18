@@ -127,3 +127,15 @@ def get_topic_ids_from_words(words):
         topic_ids.append(row[0])
 
     return topic_ids
+
+
+def get_isbn_from_book_ids(book_ids):
+    isbn_list = []
+    engine = get_engine()
+    sql = "SELECT `isbn` FROM `books` WHERE `id` IN (" + ("%s," * (len(book_ids)))[:-1] + ")"
+    ex = engine.execute(sql, book_ids)
+
+    for row in ex:
+        isbn_list.append(row[0])
+
+    return isbn_list
