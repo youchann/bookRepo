@@ -16,8 +16,8 @@ def get_engine():
 
 def get_book_ids():
     engine = get_engine()
-    result = engine.execute('SELECT `id` FROM `books`')
-    # result = engine.execute('SELECT `id` FROM `books` WHERE `id` >= 9816024')
+    # result = engine.execute('SELECT `id` FROM `books`')
+    result = engine.execute('SELECT `id` FROM `books` WHERE `id` >= 9737010')
 
     return result
 
