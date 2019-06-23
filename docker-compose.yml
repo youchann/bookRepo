@@ -4,6 +4,8 @@ services:
   api:
     build: src/.
     tty: true
+    environment:
+      DB_HOST: db
     volumes:
       - "./src:/src"
     ports:

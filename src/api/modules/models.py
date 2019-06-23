@@ -1,12 +1,13 @@
 import sqlalchemy
 from pprint import pprint
+import os
 
 def get_engine():
     url = 'mysql://%s:%s@%s/%s?charset=utf8mb4' % (
-        'root',          # username
-        'root',          # password
-        'db',            # server
-        'test_database'  # db
+        'root',                # username
+        'root',                # password
+        os.environ['DB_HOST'], # server
+        'test_database'        # db
     )
     engine = sqlalchemy.create_engine(url, echo=True)
 
