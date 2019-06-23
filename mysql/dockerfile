@@ -1,0 +1,16 @@
+FROM mysql:5.7
+
+ENV TZ Azia/Tokyo
+
+ENV MYSQL_ROOT_PASSWORD root
+ENV MYSQL_DATABASE test_database
+ENV MYSQL_USER docker
+ENV MYSQL_PASSWORD docker
+
+ADD ./data /var/lib/mysql
+ADD ./my.cnf /etc/mysql/conf.d/my.cnf
+ADD ./sqls /docker-entrypoint-initdb.d
+
+EXPOSE 3306
+
+CMD mysqld
