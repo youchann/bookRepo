@@ -9,7 +9,15 @@ services:
     volumes:
       - "./src:/src"
     ports:
-      - "5000:5000"
+      - 5000:5000
+
+  front:
+    build: front/.
+    tty: true
+    volumes:
+      - "./front:/src"
+    ports:
+      - 5550:8080
 
   batch:
     build: batch/.
@@ -19,7 +27,7 @@ services:
     volumes:
       - "./batch:/src"
     ports:
-      - "5050:5050"
+      - 5050:5050
 
   db:
     build: mysql/.
