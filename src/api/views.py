@@ -2,6 +2,11 @@ from flask import jsonify, request
 from api import app
 from api.modules import nlp, models
 
+@app.route('/')
+def index():
+    return "hello world"
+
+
 @app.route('/search')
 def search():
     keyword = request.args.get('keyword')
@@ -12,6 +17,7 @@ def search():
         "analyzed_keywords": word_list,
         "similar_words": similar_word_list,
     })
+
 
 @app.route('/show_adjective_topics', methods=['POST'])
 def show_adjective_topics():

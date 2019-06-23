@@ -4,15 +4,10 @@ services:
   api:
     build: src/.
     tty: true
-    environment:
-      TZ: Azia/Tokyo
-      FLASK_APP: run.py
-      FLASK_ENV: development
     volumes:
       - "./src:/src"
     ports:
       - "5000:5000"
-    command: flask run --host 0.0.0.0 --port 5000
 
   batch:
     build: batch/.

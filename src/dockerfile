@@ -19,6 +19,14 @@ RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git\
     && cd mecab-ipadic-neologd\
     && bin/install-mecab-ipadic-neologd -n -y
 
-ADD ./requirements.txt /src/
+ADD . /src/
 WORKDIR /src/
 RUN pip install -r requirements.txt
+
+ENV TZ Azia/Tokyo
+ENV FLASK_APP run.py
+ENV FLASK_ENV development
+
+EXPOSE 5000
+
+CMD flask run --host 0.0.0.0 --port 5000
