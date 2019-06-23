@@ -15,7 +15,7 @@ services:
     build: front/.
     tty: true
     volumes:
-      - "./front:/src"
+      - "./front/app:/app"
     ports:
       - 5550:8080
 

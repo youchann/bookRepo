@@ -12,7 +12,8 @@
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.1.0",
-    "vue-router": "^3.0.3"
+    "vue-router": "^3.0.3",
+    "vuetify": "^1.5.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",
@@ -26,8 +27,12 @@
     "eslint-plugin-vue": "^5.0.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
     "typescript": "^3.4.3",
-    "vue-template-compiler": "^2.6.10"
+    "vue-cli-plugin-vuetify": "^0.5.0",
+    "vue-template-compiler": "^2.6.10",
+    "vuetify-loader": "^1.0.5"
   },
   "eslintConfig": {
     "root": true,
@@ -39,7 +44,33 @@
       "@vue/prettier",
       "@vue/typescript"
     ],
-    "rules": {},
+    "rules": {
+      "camelcase": "off",
+      "comma-dangle": "off",
+      "comma-spacing": "off",
+      "eqeqeq": "off",
+      "handle-callback-err": "off",
+      "indent": "off",
+      "key-spacing": "off",
+      "keyword-spacing": "off",
+      "no-multi-spaces": "off",
+      "no-undef": "off",
+      "no-unused-vars": "off",
+      "object-curly-spacing": "off",
+      "quotes": "off",
+      "semi": "off",
+      "space-before-function-paren": "off",
+      "space-before-blocks": "off",
+      "space-in-parens": "off",
+      "spaced-comment": "off",
+      "space-infix-ops": "off",
+      "no-dupe-keys": "off",
+      "no-fallthrough": "off",
+      "no-spaced-func": "off",
+      "no-multiple-empty-lines": "off",
+      "no-trailing-spaces": "off",
+      "padded-blocks": "off"
+    },
     "parserOptions": {
       "parser": "@typescript-eslint/parser"
     }
