@@ -12,6 +12,9 @@ def save_user():
     # {
     #     "name": "hogehoge",
     # }
+    if request.headers['Content-Type'] != 'application/json':
+        print(request.headers['Content-Type'])
+        return jsonify(res='error'), 400
     name = request.json['name']
     if not name:
         print("name is not exist")
@@ -91,3 +94,27 @@ def get_isbn_from_book_ids():
         "isbn_list": isbn_list
     })
 
+@app.route('/save_evaluation_data', methods=['POST'])
+def save_evaluation_data():
+    # 想定しているJSON
+    # {
+    #     "user_id" : "123",
+    #     "evaluation_data" : [
+    #         {
+    #             "evaluation_id": 1,
+    #             "evaluation" : 3,
+    #         },
+    #         {
+    #             "evaluation_id": 2,
+    #             "evaluation": 4,
+    #         },
+    #         ...
+    #     ]
+    # }
+    if request.headers['Content-Type'] != 'application/json':
+        print(request.headers['Content-Type'])
+        return jsonify(res='error'), 400
+
+    models.save_evaluation(request.json['user_id'], request.json['evaluation_data'])
+
+    return "ok"

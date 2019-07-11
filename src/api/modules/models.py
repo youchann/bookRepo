@@ -153,3 +153,9 @@ def save_name(name):
         id = row[0]
 
     return id
+
+def save_evaluation(user_id, evaluation_data):
+    engine = get_engine()
+    sql = "INSERT INTO evaluation_data(`user_id`, `evaluation_id`, `evaluation`) VALUES (%s, %s, %s)"
+    for data in evaluation_data:
+        engine.execute(sql, [user_id, data['evaluation_id'], data['evaluation']])
