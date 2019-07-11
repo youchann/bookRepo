@@ -10,6 +10,7 @@ def index():
 @app.route('/search')
 def search():
     keyword = request.args.get('keyword')
+    models.save_searched_word(keyword)
     word_list = nlp.analyze_text(keyword)
     similar_word_list = models.get_similar_words(word_list["adjective"])
 

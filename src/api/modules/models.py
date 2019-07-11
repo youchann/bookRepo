@@ -142,6 +142,12 @@ def get_isbn_from_book_ids(book_ids):
     return isbn_list
 
 
+def save_searched_word(keyword):
+    engine = get_engine()
+    sql = "INSERT INTO search_words(`word`) VALUES (%s)"
+    engine.execute(sql, [keyword])
+
+
 def save_evaluation(user_id, evaluation_data):
     engine = get_engine()
     sql = "INSERT INTO evaluation_data(`user_id`, `evaluation_id`, `evaluation`) VALUES (%s, %s, %s)"
