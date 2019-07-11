@@ -1,29 +1,24 @@
-# app
+# Vuetify docker-composeの初期起動
+## 前提条件
+- Docker がインストールされていること
+- Docker Compose がインストールされていること
 
-## Project setup
+## プロジェクトセットアップ
 ```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn run serve
+git clone https://github.com/yoshis2/vue-project.git
 ```
 
-### Compiles and minifies for production
+### Dockerの設置しているフォルダに移動
 ```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
+cd docker
 ```
 
-### Lints and fixes files
+### Dockerを起動
 ```
-yarn run lint
+docker-compose up
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 2、3分ほど待ってから以下URLへ遷移するとVue(Vuetify)画面が起動する
+```
+http://localhost:2300
+```

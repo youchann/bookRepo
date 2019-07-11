@@ -1,9 +1,13 @@
-FROM node:11.1
-RUN npm install -g @vue/cli
+FROM node:12-alpine
+
+RUN rm /bin/sh && ln -s /bin/ash /bin/sh
+
+RUN apk update
+
+ADD ./app/ /app/
 
 WORKDIR /app
-COPY app .
-RUN yarn install
 
-EXPOSE 8080
-CMD yarn serve
+EXPOSE 5550
+
+CMD npm install && yarn serve
