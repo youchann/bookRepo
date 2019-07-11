@@ -6,26 +6,6 @@ from api.modules import nlp, models
 def index():
     return "hello world"
 
-@app.route('/save_user', methods=['POST'])
-def save_user():
-    # 想定しているJSON
-    # {
-    #     "name": "hogehoge",
-    # }
-    if request.headers['Content-Type'] != 'application/json':
-        print(request.headers['Content-Type'])
-        return jsonify(res='error'), 400
-    name = request.json['name']
-    if not name:
-        print("name is not exist")
-        return jsonify(res='error'), 400
-
-    id = models.save_name(name)
-    return jsonify({
-        "id": id,
-        "name" : name,
-    })
-
 
 @app.route('/search')
 def search():

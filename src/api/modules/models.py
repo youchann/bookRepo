@@ -141,18 +141,6 @@ def get_isbn_from_book_ids(book_ids):
 
     return isbn_list
 
-def save_name(name):
-    engine = get_engine()
-    sql = "INSERT INTO users(`name`) VALUES (%s)"
-    engine.execute(sql, [name])
-
-    sql = "SELECT MAX(id) FROM users"
-    ex = engine.execute(sql)
-
-    for row in ex:
-        id = row[0]
-
-    return id
 
 def save_evaluation(user_id, evaluation_data):
     engine = get_engine()
