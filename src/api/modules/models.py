@@ -52,6 +52,7 @@ def get_adjective_topics(noun, adjective):
     if noun: topic_ids_from_noun = get_topic_ids_from_words(noun)
     topic_ids_from_adjective = get_topic_ids_from_words(adjective)
 
+    # TODO: ビジネス書or小説の選択に対応させる
     # 形容詞トピックのbook_idを求める
     if topic_ids_from_noun:
         sql = "SELECT DISTINCT `T1`.`book_id` FROM `topics` `T1`, `topics` `T2` " \
