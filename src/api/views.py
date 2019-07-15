@@ -24,7 +24,6 @@ def search():
 def show_adjective_topics():
     # 想定しているJSON
     # {
-    #     "keyword": "渋谷に12時に集合ね！すごい、はやい",
     #     "noun": ["集合"],
     #     "adjective": ["すごい", "はやい"],
     #     "selected_keywords": ["えぐい", "しゅごい", "魂", "小説"]
