@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-layout fill-height align-center id="text-layout">
+    <v-layout align-center id="text-layout">
       <v-flex xs12>
         <v-text-field v-model="keyword" v-on:keyup=searchIfEntered required label="キーワードを入力してください (例) 感動 泣ける 青春"></v-text-field>
       </v-flex>
