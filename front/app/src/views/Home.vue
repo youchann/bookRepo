@@ -21,10 +21,10 @@ export default {
   }),
   methods: {
     search() {
-      this.$router.push({ path: `search?keyword=${this.keyword}`})
+      this.$router.push({ path: `search?keyword=${this.keyword}`});
     },
     searchIfEntered(e) {
-      if (e.keyCode === 13) this.search()
+      if (e.keyCode === 13) this.search();
     }
   }
 };

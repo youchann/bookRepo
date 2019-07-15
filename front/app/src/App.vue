@@ -2,8 +2,7 @@
   <v-app>
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
+        <span>実験しようぜ</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn flat href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank">
@@ -18,5 +17,7 @@
 </template>
 
 <script>
-export default {};
+export default {
+
+};
 </script>
