@@ -5,6 +5,7 @@ import Search from "./views/Search.vue";
 import Mixins from "./views/Mixins.vue";
 import Tables from "./views/Tables.vue";
 import UserHello from "./views/UserHello.vue";
+import SelectTopics from "./views/SelectTopics.vue";
 
 Vue.use(Router);
 
@@ -21,6 +22,11 @@ export default new Router({
       path: "/search",
       name: "search",
       component: Search
+    },
+    {
+      path: "/select_topics",
+      name: "selectTopics",
+      component: SelectTopics,
     },
     {
       path: "/hello",

@@ -7,7 +7,7 @@
     </v-layout>
     <v-layout align-center id="text-layout">
       <v-flex xs12>
-        <h1 class="text-xs-center" id="heading">あなたが欲しい本と近い関連のある単語を選択してください↓</h1>
+        <h1 class="text-xs-center" id="heading">あなたが欲しい本と関連の近い単語を選択してください↓</h1>
       </v-flex>
     </v-layout>
  
@@ -23,11 +23,17 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <v-layout justify-end>
+      <v-flex xs1>
+        <v-btn v-on:click=nextPage large color="info">次へ >></v-btn>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
 <script>
 import axios from 'axios'
+import store from '../App'
 
 export default {
   data: function() {
@@ -47,6 +53,8 @@ export default {
       }
     }).then(response => {
       this.$data.similarWords = response.data.similar_words
+      store.state.noun = response.data.analyzed_keywords.noun
+      store.state.adjective = response.data.analyzed_keywords.adjective
     })
   },
   methods: {
@@ -59,6 +67,12 @@ export default {
       }
       this.$data.selectedIndex = selectedIndex
       console.log(this.$data.selectedIndex)
+    },
+    nextPage: function() {
+      this.$data.selectedIndex.forEach(index => {
+        store.state.selectedSimilarWords.push(this.$data.similar_words[index])
+      })
+      this.$router.push({ path: 'select_topics?word_class=adjective'});
     }
   },
 };

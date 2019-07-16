@@ -17,7 +17,13 @@
 </template>
 
 <script>
-export default {
-
-};
+var store = {
+  debug: true,
+  state: {
+    selectedSimilarWords: [],
+    noun: [],
+    adjective: []
+  }
+}
+export default store
 </script>

@@ -23,9 +23,9 @@ export default {
     search() {
       this.$router.push({ path: `search?keyword=${this.keyword}`});
     },
-    searchIfEntered(e) {
-      if (e.keyCode === 13) this.search();
-    }
+    // searchIfEntered(e) {
+    //   if (e.keyCode === 13) this.search();
+    // }
   }
 };
 </script>
