@@ -28,9 +28,9 @@ def show_adjective_topics():
     #     "adjective": ["すごい", "はやい"],
     #     "selected_keywords": ["えぐい", "しゅごい", "魂", "小説"]
     # }
-    if request.headers['Content-Type'] != 'application/json':
-        print(request.headers['Content-Type'])
-        return jsonify(res='error'), 400
+    # if request.headers['Content-Type'] != 'application/json':
+    #     print(request.headers['Content-Type'])
+    #     return jsonify(res='error'), 400
 
     data_json = nlp.separate_selected_keywords(request.json)
 

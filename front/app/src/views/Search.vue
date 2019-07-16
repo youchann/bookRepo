@@ -70,7 +70,7 @@ export default {
     },
     nextPage: function() {
       this.$data.selectedIndex.forEach(index => {
-        store.state.selectedSimilarWords.push(this.$data.similar_words[index])
+        store.state.selectedSimilarWords.push(this.$data.similarWords[index])
       })
       this.$router.push({ path: 'select_topics?word_class=adjective'});
     }
