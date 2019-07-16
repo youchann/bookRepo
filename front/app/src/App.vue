@@ -20,6 +20,7 @@
 var store = {
   debug: true,
   state: {
+    bookIds: [],
     selectedSimilarWords: [],
     noun: [],
     adjective: []

@@ -12,11 +12,12 @@
       </v-flex>
     </v-layout>
  
-    <v-layout row wrap v-for="(topic, index) in adjectiveTopics" :key="index">
+    <v-layout row wrap v-for="(topic, index) in topics" :key="index">
       <v-flex xs1>
         <v-card class="topic-checkbox">
           <v-checkbox
-          :label="``">
+          :label="``"
+          @change="clickedBox(index)">
           </v-checkbox>
         </v-card>
       </v-flex>
@@ -43,24 +44,60 @@ import store from '../App'
 export default {
   data: function() {
     return {
-      adjectiveTopics: []
+      topics: [],
+      selectedIndex : []
     }
   },
   created: function() {
-    let url = (process.env.API_URL) ? process.env.API_URL : 'http://localhost:5000'
-    url += '/show_adjective_topics'
-
-    axios.post(url, {
-      noun: store.state.noun,
-      adjective: store.state.adjective,
-      selected_keywords: store.state.selectedSimilarWords
-    }).then(response => {
-      this.$data.adjectiveTopics = response.data.adjective_topics
-    })
+    this.postToAPI(true)
   },
   methods: {
-    
+    clickedBox: function(index) {
+      let selectedIndex = this.$data.selectedIndex
+      if (selectedIndex.includes(index)) {
+        selectedIndex = selectedIndex.filter( value => value != index )
+      } else {
+        selectedIndex.push(index)
+      }
+      this.$data.selectedIndex = selectedIndex
+      console.log(this.$data.selectedIndex)
+    },
+    nextPage: function() {
+      this.$data.selectedIndex.forEach(index => {
+        console.log(this.$data.topics[index][0])
+        store.state.bookIds.push(this.$data.topics[index][0])
+      })
+      if (this.$route.query.word_class == 'adjective') {
+        this.$router.push({ path: 'select_topics?word_class=noun'});
+      } else {
+        this.$router.push({ path: 'select_books'})
+      }
+    },
+    postToAPI: function(isAdjective) {
+      console.log(store.state.bookIds)
+      let url = (process.env.API_URL) ? process.env.API_URL : 'http://localhost:5000'
+      url += (isAdjective) ? '/show_adjective_topics' : '/show_noun_topics'
+      const json = (isAdjective) ? {
+        noun: store.state.noun,
+        adjective: store.state.adjective,
+        selected_keywords: store.state.selectedSimilarWords
+      } : {
+        book_ids: store.state.bookIds
+      }
+
+      axios.post(url, json).then(response => {
+        this.$data.topics = []
+        this.$data.topics = (isAdjective) ? response.data.adjective_topics : response.data.noun_topics
+        console.log(this.$data.topics)
+      })
+
+      store.state.book_ids = []
+    }
   },
+  beforeRouteUpdate: function(to, from, next) {
+    this.postToAPI(false)
+    next();
+  }
 };
 </script>
 
@@ -78,7 +115,7 @@ export default {
 .topic-checkbox {
   height: 80px;
 }
-.v-input {
+.topic-checkbox .v-input {
   align-items: center;
   justify-content: center;
   padding-left: 7px;
