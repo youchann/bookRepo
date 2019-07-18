@@ -47,9 +47,9 @@ def show_noun_topics():
     # {
     #     "book_ids": [1231412412,1241421,12113413,423412413],
     # }
-    if request.headers['Content-Type'] != 'application/json':
-        print(request.headers['Content-Type'])
-        return jsonify(res='error'), 400
+    # if request.headers['Content-Type'] != 'application/json':
+    #     print(request.headers['Content-Type'])
+    #     return jsonify(res='error'), 400
 
     noun_topics = models.get_noun_topics(request.json['book_ids'])
 

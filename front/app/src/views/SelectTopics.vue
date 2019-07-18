@@ -17,7 +17,9 @@
         <v-card class="topic-checkbox">
           <v-checkbox
           :label="``"
-          @change="clickedBox(index)">
+          :value="index"
+          v-model="selectedIndex"
+          @change="clickedBox()">
           </v-checkbox>
         </v-card>
       </v-flex>
@@ -52,14 +54,7 @@ export default {
     this.postToAPI(true)
   },
   methods: {
-    clickedBox: function(index) {
-      let selectedIndex = this.$data.selectedIndex
-      if (selectedIndex.includes(index)) {
-        selectedIndex = selectedIndex.filter( value => value != index )
-      } else {
-        selectedIndex.push(index)
-      }
-      this.$data.selectedIndex = selectedIndex
+    clickedBox: function() {
       console.log(this.$data.selectedIndex)
     },
     nextPage: function() {
@@ -87,6 +82,7 @@ export default {
 
       axios.post(url, json).then(response => {
         this.$data.topics = []
+        this.$data.selectedIndex = []
         this.$data.topics = (isAdjective) ? response.data.adjective_topics : response.data.noun_topics
         console.log(this.$data.topics)
       })
