@@ -21,6 +21,7 @@ var store = {
   debug: true,
   state: {
     bookIds: [],
+    searchWord: '',
     selectedSimilarWords: [],
     noun: [],
     adjective: []

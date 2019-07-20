@@ -64,9 +64,9 @@ def get_isbn_from_book_ids():
     # {
     #     "book_ids": [1231412412,1241421,12113413,423412413],
     # }
-    if request.headers['Content-Type'] != 'application/json':
-        print(request.headers['Content-Type'])
-        return jsonify(res='error'), 400
+    # if request.headers['Content-Type'] != 'application/json':
+    #     print(request.headers['Content-Type'])
+    #     return jsonify(res='error'), 400
 
     isbn_list = models.get_isbn_from_book_ids(request.json['book_ids'])
 

@@ -87,7 +87,7 @@ export default {
         console.log(this.$data.topics)
       })
 
-      store.state.book_ids = []
+      store.state.bookIds = []
     }
   },
   beforeRouteUpdate: function(to, from, next) {
