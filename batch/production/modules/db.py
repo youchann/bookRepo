@@ -16,11 +16,17 @@ def get_engine():
 
 def get_book_ids():
     engine = get_engine()
-    # result = engine.execute('SELECT `id` FROM `books`')
-    result = engine.execute('SELECT `id` FROM `books` WHERE `id` >= 9737010')
+    result = engine.execute('SELECT `id` FROM `books`')
+    # result = engine.execute('SELECT `id` FROM `books` WHERE `id` >= 9737010')
 
     return result
 
+
+def get_isbns():
+    engine = get_engine()
+    result = engine.execute('SELECT `isbn` FROM `books`')
+
+    return result
 
 def insert_book_info(book_info):
     engine = get_engine()
@@ -114,3 +120,9 @@ def insert_topic_words(topic_ids, topics_with_id):
         count += 1
     
     del engine
+
+
+def regist_image_url(isbn, image_url):
+    engine = get_engine()
+    sql = 'UPDATE `books` SET `image_url` = %s WHERE `isbn` = %s'
+    engine.execute(sql, [image_url, isbn])

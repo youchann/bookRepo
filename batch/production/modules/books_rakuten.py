@@ -57,3 +57,18 @@ def narrow_books(book_info):
     print("----------------------------レビュー数ソート終了----------------------------")
 
     return narrowed_book_info
+
+
+def get_image_url(isbn):# jsonデータを整形
+    print("----------------------------画像URL取得開始----------------------------")
+    print("isbn :", isbn)
+    url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404"
+    params = {'applicationId': config.RAKUTEN_APPLICATION_ID, 'isbn': isbn}
+
+    json_data = books.json_from_request(url, params)
+    print("----------------------------画像URL取得終了----------------------------")
+
+    image_url = ""
+    if json_data['Items']:
+        image_url = json_data['Items'][0]['Item']['largeImageUrl']
+    return image_url 
