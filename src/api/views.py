@@ -74,11 +74,35 @@ def get_isbn_from_book_ids():
         "isbn_list": isbn_list
     })
 
+
+@app.route('/get_info_from_book_ids', methods=['POST'])
+def get_info_from_book_ids():
+    # 想定しているJSON
+    # {
+    #     "book_ids": [1231412412,1241421,12113413,423412413],
+    # }
+    # if request.headers['Content-Type'] != 'application/json':
+    #     print(request.headers['Content-Type'])
+    #     return jsonify(res='error'), 400
+
+    info_list = models.get_info_from_book_ids(request.json['book_ids'])
+    return jsonify({
+        "info_list": info_list
+    })
+
+
+@app.route('/get_evaluation_data', methods=['GET'])
+def get_evaluation_data():
+    evaluation_list = models.get_evaluation_data()
+    return jsonify({
+        "evaluation_list": evaluation_list,
+    })
+
+
 @app.route('/save_evaluation_data', methods=['POST'])
 def save_evaluation_data():
     # 想定しているJSON
     # {
-    #     "user_id" : "123",
     #     "evaluation_data" : [
     #         {
     #             "evaluation_id": 1,
@@ -91,10 +115,11 @@ def save_evaluation_data():
     #         ...
     #     ]
     # }
-    if request.headers['Content-Type'] != 'application/json':
-        print(request.headers['Content-Type'])
-        return jsonify(res='error'), 400
+    # if request.headers['Content-Type'] != 'application/json':
+    #     print(request.headers['Content-Type'])
+    #     return jsonify(res='error'), 400
 
-    models.save_evaluation(request.json['user_id'], request.json['evaluation_data'])
+    user_id = models.generate_user_id()
+    models.save_evaluation(user_id, request.json['evaluation_data'])
 
     return "ok"

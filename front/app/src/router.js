@@ -7,6 +7,8 @@ import Tables from "./views/Tables.vue";
 import UserHello from "./views/UserHello.vue";
 import SelectTopics from "./views/SelectTopics.vue";
 import SelectBooks from "./views/SelectBooks.vue";
+import Evaluation from "./views/Evaluation.vue";
+import End from "./views/End.vue";
 
 Vue.use(Router);
 
@@ -33,6 +35,16 @@ export default new Router({
       path: "/select_books",
       name: "selectBooks",
       component: SelectBooks,
+    },
+    {
+      path: "/evaluation",
+      name: "evaluation",
+      component: Evaluation,
+    },
+    {
+      path: "/end",
+      name: "end",
+      component: End,
     },
     {
       path: "/hello",

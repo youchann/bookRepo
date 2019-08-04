@@ -143,6 +143,37 @@ def get_isbn_from_book_ids(book_ids):
     return isbn_list
 
 
+def get_info_from_book_ids(book_ids):
+    info_list = []
+    engine = get_engine()
+    sql = "SELECT `id`, `name`, `image_url` FROM `books` WHERE `id` IN (" + ("%s," * (len(book_ids)))[:-1] + ")"
+    ex = engine.execute(sql, book_ids)
+
+    for row in ex:
+        info_list.append({
+            'id': row[0],
+            'name': row[1],
+            'image_url': row[2],
+        })
+
+    return info_list
+
+
+def get_evaluation_data():
+    engine = get_engine()
+    sql = "SELECT `id`, `description` FROM `evaluation_items`"
+    ex = engine.execute(sql)
+
+    evaluation_data = []
+    for row in ex:
+        evaluation_data.append({
+            'id': row[0],
+            'description': row[1],
+        })
+    
+    return evaluation_data
+
+
 def save_searched_word(keyword):
     engine = get_engine()
     sql = "INSERT INTO search_words(`word`) VALUES (%s)"
@@ -154,3 +185,15 @@ def save_evaluation(user_id, evaluation_data):
     sql = "INSERT INTO evaluation_data(`user_id`, `evaluation_id`, `evaluation`) VALUES (%s, %s, %s)"
     for data in evaluation_data:
         engine.execute(sql, [user_id, data['evaluation_id'], data['evaluation']])
+
+def generate_user_id():
+    engine = get_engine()
+    sql = "SELECT max(user_id) FROM `evaluation_data`"
+    ex = engine.execute(sql)
+    for row in ex:
+        max_user_id = row[0]
+
+    if max_user_id:
+        return max_user_id + 1
+    else:
+        return 1

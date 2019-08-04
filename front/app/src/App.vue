@@ -20,6 +20,8 @@
 var store = {
   debug: true,
   state: {
+    evaluationData: [],
+    selectedBookInfo: {},
     bookIds: [],
     searchWord: '',
     selectedSimilarWords: [],

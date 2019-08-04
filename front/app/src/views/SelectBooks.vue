@@ -2,13 +2,18 @@
   <v-container
     grid-list-md
   >
+    <v-layout align-center id="text-layout">
+      <v-flex xs12>
+        <h1 class="text-xs-center" id="heading">あなたが欲しいと思った本を選択してください</h1>
+      </v-flex>
+    </v-layout>
     <v-layout row wrap>
       <v-flex
         xs3
-        v-for="(book_isbn, index) in booksISBN"
+        v-for="(book_info, index) in bookInfoList"
         :key="index"
       >
-        <BookCard :book_isbn="book_isbn"/>
+        <BookCard :book_info="book_info"/>
       </v-flex>
     </v-layout>
   </v-container>
@@ -25,19 +30,19 @@ export default {
   },
   data: function() {
     return {
-      booksISBN: []
+      bookInfoList: []
     }
   },
   created: function() {
     console.log(store.state.bookIds)
     let url = (process.env.API_URL) ? process.env.API_URL : 'http://localhost:5000'
-    url += '/get_isbn_from_book_ids'
+    url += '/get_info_from_book_ids'
     const json = {
       book_ids: store.state.bookIds
     }
     axios.post(url, json).then(response => {
-      this.$data.booksISBN = response.data.isbn_list
-      console.log(this.$data.booksISBN)
+      this.$data.bookInfoList = response.data.info_list
+      console.log(this.$data.bookInfoList)
     })
   },
   methods: {
