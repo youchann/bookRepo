@@ -20,6 +20,7 @@ def get_similar_words(word_list):
     synset_list = []
     similar_words_list = []
 
+    # FIXME: "pos"の意味がわからない。なければ色々引っかかるはず
     sql = "SELECT `wordid` FROM `word` WHERE `lemma` IN (" + ("%s,"*(len(word_list)))[:-1] + ") AND `pos` = 'a'"
     ex = engine.execute(sql, word_list)
     for row in ex:
@@ -54,6 +55,7 @@ def get_adjective_topics(noun, adjective):
 
     # TODO: ビジネス書or小説の選択に対応させる
     # 形容詞トピックのbook_idを求める
+    # FIXME: topic_ids_from_adjectiveがない場合のハンドリング
     if topic_ids_from_noun:
         sql = "SELECT DISTINCT `T1`.`book_id` FROM `topics` `T1`, `topics` `T2` " \
               "WHERE `T1`.`id` IN (" + ("%s," * (len(topic_ids_from_adjective)))[:-1] + ") " \

@@ -12,6 +12,7 @@ def search():
     keyword = request.args.get('keyword')
     models.save_searched_word(keyword)
     word_list = nlp.analyze_text(keyword)
+    # FIXME: 形容詞・名詞いずれかのみで類義語を抽出するのはなぜだろう
     similar_word_list = models.get_similar_words(word_list["adjective"]) if word_list["adjective"] else models.get_similar_words(word_list["noun"])
 
     return jsonify({
