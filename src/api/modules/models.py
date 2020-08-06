@@ -20,7 +20,7 @@ def get_similar_words(word_list):
     synset_list = []
     similar_words_list = []
 
-    # FIXME: "pos"の意味がわからない。なければ色々引っかかるはず
+    # TODO: pos=aじゃなくても良いかも。
     sql = "SELECT `wordid` FROM `word` WHERE `lemma` IN (" + ("%s,"*(len(word_list)))[:-1] + ") AND `pos` = 'a'"
     ex = engine.execute(sql, word_list)
     for row in ex:

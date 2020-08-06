@@ -16,6 +16,8 @@ def get_lda_model(texts):
 
     # 辞書を作成 (単語ID・単語・単語出現回数を持つデータのこと)
     dictionary = gensim.corpora.Dictionary(texts)
+    # 閾値を設定することもできる
+    # dictionary.filter_extremes(no_below=3, no_above=0.8)
 
     # 辞書を保存することもできる
     # dictionary.save('/src/deerwester.dict')
@@ -50,6 +52,9 @@ def get_lda_model(texts):
     # LDAモデルを構築
     # num_topic=5で、5個のトピックを持つLDAモデルを作成
     lda = gensim.models.ldamodel.LdaModel(corpus=corpus_tfidf, num_topics=5, id2word=dictionary)
+
+    # TODO: 実験がうまく行かない場合、モデルの評価を視野に入れる
+    #       あるいはコーパスにtfidfオブジェクトを用いない
 
     del tfidf
     del corpus_tfidf
