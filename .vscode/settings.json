@@ -1,5 +1,8 @@
 {
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": false,
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "eslint.workingDirectories": [
+        "./front-v2",
+    ]
 }
