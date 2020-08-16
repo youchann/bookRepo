@@ -2,7 +2,10 @@
   "compilerOptions": {
     "target": "ES2015",
     "module": "ESNext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "allowJs": false,
     "checkJs": false,
     "jsx": "preserve",
@@ -25,6 +28,14 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
   },
-  "include": ["**/*"],
-  "exclude": ["node_modules"],
+  "types": [
+    "@types/node",
+    "@types/express"
+  ],
+  "include": [
+    "**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
 }
