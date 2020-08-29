@@ -11,15 +11,6 @@ services:
     ports:
       - 5000:5000
 
-  front:
-    build: front/.
-    ports:
-      - 5550:8080
-    volumes:
-      - ./front/app:/app
-    stdin_open: true
-    tty: true
-
   batch:
     build: batch/.
     tty: true
