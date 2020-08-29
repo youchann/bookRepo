@@ -7,11 +7,36 @@ def index():
     return "hello world"
 
 
+@app.route('/register_user', methods=['POST'])
+def register_user():
+    # 想定しているJSON
+    # {
+    #     "student_number": 12345678,
+    # }
+
+    student_number = request.json["student_number"]
+    if type(student_number) is not int:
+        return jsonify({
+            'message': 'student_numberは数値ではありません'
+        }), 500
+
+    user_id = models.register_user(student_number)
+
+    return jsonify({
+        "id": user_id 
+    })
+
 @app.route('/search')
 def search():
     keyword = request.args.get('keyword')
-    # models.save_searched_word(keyword)
+    models.save_searched_word(keyword)
     word_list = nlp.analyze_text(keyword)
+
+    if (not word_list["adjective"] and not word_list["noun"]):
+        return jsonify({
+            'message': '形容詞または名詞が見つかりませんでした'
+        }), 500
+
     # FIXME: 形容詞・名詞いずれかのみで類義語を抽出するのはなぜだろう
     similar_word_list = models.get_similar_words(word_list["adjective"]) if word_list["adjective"] else models.get_similar_words(word_list["noun"])
 
@@ -91,6 +116,23 @@ def get_info_from_book_ids():
         "info_list": info_list
     })
 
+@app.route('/register_book_ids', methods=['POST'])
+def register_book_ids():
+    # 想定しているJSON
+    # {
+    #     "user_id": 1,
+    #     "book_ids": [1231412412,1241421,12113413,423412413],
+    # }
+    user_id = request.json["user_id"]
+    book_ids = request.json["book_ids"]
+    if (not type(user_id) is int or not book_ids):
+        return jsonify({
+            'message': 'リクエストの形式または型が正しくありません。'
+        }), 500
+
+    models.register_book_ids(book_ids, user_id)
+    return jsonify(), 204
+
 
 @app.route('/get_evaluation_data', methods=['GET'])
 def get_evaluation_data():
@@ -120,7 +162,14 @@ def save_evaluation_data():
     #     print(request.headers['Content-Type'])
     #     return jsonify(res='error'), 400
 
-    user_id = models.generate_user_id()
-    models.save_evaluation(user_id, request.json['evaluation_data'])
+    evaluation_data = request.json['evaluation_data']
+    user_id = request.json['user_id']
 
-    return "ok"
+    if (not type(user_id) is int or not evaluation_data):
+        return jsonify({
+            'message': 'リクエストの形式または型が正しくありません。'
+        }), 500
+
+    models.save_evaluation(user_id, evaluation_data)
+
+    return jsonify(), 204

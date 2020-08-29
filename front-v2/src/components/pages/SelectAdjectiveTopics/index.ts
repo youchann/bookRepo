@@ -1,0 +1,1 @@
+export { SelectAdjectiveTopics } from "./SelectAdjectiveTopics";

@@ -9,5 +9,4 @@ mysql -u docker -pdocker test_database < "/docker-entrypoint-initdb.d/002-add-un
 mysql -u docker -pdocker test_database < "/docker-entrypoint-initdb.d/003-add-auto-increment-to-word.sql"
 mysql -u docker -pdocker test_database < "/docker-entrypoint-initdb.d/004-add-user-table.sql"
 mysql -u docker -pdocker test_database < "/docker-entrypoint-initdb.d/005-add-evaluation-tables.sql"
-mysql -u docker -pdocker test_database < "/docker-entrypoint-initdb.d/006-modify-table-columns.sql"
-mysql -u docker -pdocker test_database < "/docker-entrypoint-initdb.d/007-add-image-url-column-to-books-table.sql"
+mysql -u docker -pdocker test_database < "/docker-entrypoint-initdb.d/006-add-image-url-column-to-books-table.sql"

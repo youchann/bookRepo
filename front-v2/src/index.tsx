@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDom from "react-dom";
-import styled from "styled-components";
-import { ThemeProvider, createTheme, Typography } from "ingred-ui";
+import { ThemeProvider, createTheme } from "ingred-ui";
 import { Global } from "@emotion/core";
 
 import { globalStyle } from "./styles/globalStyle";
-
-const Hoge = styled.div``;
+import { Router } from "./router";
+import { RootContainer } from "./components/container/RootContainer";
 
 const initialization = async () => {
   const theme = createTheme();
@@ -14,8 +13,9 @@ const initialization = async () => {
     ReactDom.render(
       <ThemeProvider theme={theme}>
         <Global styles={globalStyle} />
-        <Hoge>hoge</Hoge>
-        <Typography>hoge</Typography>
+        <RootContainer>
+          <Router />
+        </RootContainer>
       </ThemeProvider>,
       document.getElementById("root"),
     );
