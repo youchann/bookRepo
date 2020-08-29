@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `users`;
 create table IF not exists `users`
 (
  `id`               INT(20) NOT NULL AUTO_INCREMENT,
- `name`             VARCHAR(20) NOT NULL,
+ `student_number`   VARCHAR(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8;
 
@@ -17,7 +17,18 @@ DROP TABLE IF EXISTS `search_words`;
 create table IF not exists `search_words`
 (
  `id`               INT(20) NOT NULL AUTO_INCREMENT,
+ `word`             VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8;
+
+---- drop ----
+DROP TABLE IF EXISTS `selected_books`;
+
+---- create ----
+create table IF not exists `selected_books`
+(
+ `id`               INT(20) NOT NULL AUTO_INCREMENT,
  `user_id`          INT(20) NOT NULL REFERENCES users(id),
- `word`             VARCHAR(20) NOT NULL,
+ `book_id`          INT(20) NOT NULL REFERENCES books(id),
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8;

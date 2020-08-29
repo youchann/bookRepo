@@ -14,6 +14,12 @@ def get_engine():
     return engine
 
 
+def register_user(student_number):
+    engine = get_engine()
+    sql = "INSERT INTO users(student_number) VALUES (%s)"
+    ex = engine.execute(sql, [student_number])
+    return ex.lastrowid
+
 def get_similar_words(word_list):
     engine = get_engine()
     word_id = []
@@ -46,36 +52,30 @@ def get_similar_words(word_list):
 
 def get_adjective_topics(noun, adjective):
     engine = get_engine()
-    topic_ids_from_noun = []
-    topic_ids_from_adjective = []
+    topic_ids = []
     book_ids = []
 
-    if noun: topic_ids_from_noun = get_topic_ids_from_words(noun)
-    topic_ids_from_adjective = get_topic_ids_from_words(adjective)
+    topic_ids = get_topic_ids_from_words(noun) + get_topic_ids_from_words(adjective)
+
+    if (not topic_ids): return []
 
     # TODO: ビジネス書or小説の選択に対応させる
     # 形容詞トピックのbook_idを求める
-    # FIXME: topic_ids_from_adjectiveがない場合のハンドリング
-    if topic_ids_from_noun:
-        sql = "SELECT DISTINCT `T1`.`book_id` FROM `topics` `T1`, `topics` `T2` " \
-              "WHERE `T1`.`id` IN (" + ("%s," * (len(topic_ids_from_adjective)))[:-1] + ") " \
-              "AND `T2`.`id` IN (" + ("%s," * (len(topic_ids_from_noun)))[:-1] + ") " \
-              "AND `T1`.`book_id` = `T2`.`book_id`"
-        ex = engine.execute(sql, topic_ids_from_adjective+topic_ids_from_noun)
-    else:
-        sql = "SELECT DISTINCT `book_id` FROM `topics` " \
-              "WHERE `id` IN (" + ("%s," * (len(topic_ids_from_adjective)))[:-1] + ")"
-        ex = engine.execute(sql, topic_ids_from_adjective)
+    sql = "SELECT DISTINCT book_id FROM topics " \
+            "WHERE id IN (" + ("%s," * (len(topic_ids)))[:-1] + ")"
+    ex = engine.execute(sql, topic_ids)
 
     for row in ex:
         book_ids.append(row[0])
 
+    if (not book_ids): return []
+
     # 形容詞トピック群を抽出する
-    sql = "SELECT `topics`.`id`,`topics`.`book_id`, `words`.`word` FROM `topics` " \
-          "INNER JOIN `topic_words` ON `topics`.`id` = `topic_words`.`topic_id` " \
-          "INNER JOIN `words` ON `topic_words`.`word_id` = `words`.`id` " \
-          "WHERE `topics`.`book_id` IN (" + ("%s," * (len(book_ids)))[:-1] + ") " \
-          "AND `topics`.`adjective_flg` = 1"
+    sql = "SELECT topics.id, topics.book_id, words.word FROM topics " \
+          "INNER JOIN topic_words ON topics.id = topic_words.topic_id " \
+          "INNER JOIN words ON topic_words.word_id = words.id " \
+          "WHERE topics.book_id IN (" + ("%s," * (len(book_ids)))[:-1] + ") " \
+          "AND topics.adjective_flg = 1"
     ex = engine.execute(sql, book_ids)
 
     adjective_topics = []
@@ -85,6 +85,7 @@ def get_adjective_topics(noun, adjective):
         topic_words.append(row[2])
         count += 1
 
+        # MEMO: 10単語づつでトピックが切り替わる
         if count == 10:
             adjective_topics.append([row[1], topic_words])
             topic_words = []
@@ -94,14 +95,15 @@ def get_adjective_topics(noun, adjective):
 
 
 def get_noun_topics(book_ids):
+    if (not book_ids): return []
     engine = get_engine()
 
     # 名詞トピック群を抽出する
-    sql = "SELECT `topics`.`id`,`topics`.`book_id`, `words`.`word` FROM `topics` " \
-          "INNER JOIN `topic_words` ON `topics`.`id` = `topic_words`.`topic_id` " \
-          "INNER JOIN `words` ON `topic_words`.`word_id` = `words`.`id` " \
-          "WHERE `topics`.`book_id` IN (" + ("%s," * (len(book_ids)))[:-1] + ") " \
-          "AND `topics`.`adjective_flg` = 0"
+    sql = "SELECT topics.id,topics.book_id, words.word FROM topics " \
+          "INNER JOIN topic_words ON topics.id = topic_words.topic_id " \
+          "INNER JOIN words ON topic_words.word_id = words.id " \
+          "WHERE topics.book_id IN (" + ("%s," * (len(book_ids)))[:-1] + ") " \
+          "AND topics.adjective_flg = 0"
     ex = engine.execute(sql, book_ids)
 
     noun_topics = []
@@ -111,6 +113,7 @@ def get_noun_topics(book_ids):
         topic_words.append(row[2])
         count += 1
 
+        # MEMO: 10単語づつでトピックが切り替わる
         if count == 10:
             noun_topics.append([row[1], topic_words])
             topic_words = []
@@ -121,6 +124,7 @@ def get_noun_topics(book_ids):
 
 
 def get_topic_ids_from_words(words):
+    if (not words): return []
     topic_ids = []
     engine = get_engine()
     sql = "SELECT DISTINCT `topic_id` FROM `topic_words` WHERE `word_id` IN" \
@@ -134,6 +138,7 @@ def get_topic_ids_from_words(words):
 
 
 def get_isbn_from_book_ids(book_ids):
+    if (not book_ids): return []
     isbn_list = []
     engine = get_engine()
     sql = "SELECT `isbn` FROM `books` WHERE `id` IN (" + ("%s," * (len(book_ids)))[:-1] + ")"
@@ -146,6 +151,7 @@ def get_isbn_from_book_ids(book_ids):
 
 
 def get_info_from_book_ids(book_ids):
+    if (not book_ids): return []
     info_list = []
     engine = get_engine()
     sql = "SELECT `id`, `name`, `image_url` FROM `books` WHERE `id` IN (" + ("%s," * (len(book_ids)))[:-1] + ")"
@@ -181,21 +187,18 @@ def save_searched_word(keyword):
     sql = "INSERT INTO search_words(`word`) VALUES (%s)"
     engine.execute(sql, [keyword])
 
+def register_book_ids(book_ids, user_id):
+    if (not book_ids or type(user_id) is not int): return
+
+    engine = get_engine()
+    sql = "INSERT INTO selected_books(user_id, book_id) VALUES (%s, %s)"
+    for book_id in book_ids:
+        engine.execute(sql, [user_id, book_id])
 
 def save_evaluation(user_id, evaluation_data):
     engine = get_engine()
-    sql = "INSERT INTO evaluation_data(`user_id`, `evaluation_id`, `evaluation`) VALUES (%s, %s, %s)"
+    sql = "INSERT INTO evaluation_data(user_id, evaluation_id, evaluation) VALUES (%s, %s, %s) " \
+          "ON DUPLICATE KEY UPDATE user_id=%s, evaluation_id=%s"
+
     for data in evaluation_data:
-        engine.execute(sql, [user_id, data['evaluation_id'], data['evaluation']])
-
-def generate_user_id():
-    engine = get_engine()
-    sql = "SELECT max(user_id) FROM `evaluation_data`"
-    ex = engine.execute(sql)
-    for row in ex:
-        max_user_id = row[0]
-
-    if max_user_id:
-        return max_user_id + 1
-    else:
-        return 1
+        engine.execute(sql, [user_id, data['evaluation_id'], data['evaluation'], user_id, data['evaluation_id']])

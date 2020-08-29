@@ -30,5 +30,6 @@ create table IF not exists `evaluation_data`
  `user_id`          INT(20) NOT NULL REFERENCES users(id),
  `evaluation_id`    INT(20) NOT NULL REFERENCES evaluation_items(id),
  `evaluation`       INT(20) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE(`user_id`, `evaluation_id`)
 ) DEFAULT CHARSET=utf8;
