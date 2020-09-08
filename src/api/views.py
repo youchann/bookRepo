@@ -37,8 +37,7 @@ def search():
             'message': '形容詞または名詞が見つかりませんでした'
         }), 500
 
-    # FIXME: 形容詞・名詞いずれかのみで類義語を抽出するのはなぜだろう
-    similar_word_list = models.get_similar_words(word_list["adjective"]) if word_list["adjective"] else models.get_similar_words(word_list["noun"])
+    similar_word_list = models.get_similar_words(word_list["adjective"] + word_list["noun"])
 
     return jsonify({
         "analyzed_keywords": word_list,

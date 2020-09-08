@@ -31,7 +31,7 @@ const Search: React.FunctionComponent = () => {
       <Spacer pt={10} />
       <Flex display="flex" alignItems="center" flexDirection="column">
         <Typography weight="bold" size="xxxl">
-          あなたの欲しい本に近しいキーワードを入力してください
+          あなたの欲しい本に近しいキーワードをなるべく多く入力してください
         </Typography>
         <Typography weight="bold" size="xxl" color={theme.palette.danger.main}>
           ※１つ以上の名詞または形容詞を含めるようにしてください
@@ -43,7 +43,7 @@ const Search: React.FunctionComponent = () => {
             placeholder="(例) 感動 泣ける 青春"
             value={text}
             onChange={handleChangeInput}
-            onKeyDown={handleEnter}
+            onKeyPress={handleEnter}
           />
         </Styled.InputContainer>
         <Spacer pt={6} />

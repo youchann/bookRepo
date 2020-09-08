@@ -26,14 +26,14 @@ def get_similar_words(word_list):
     synset_list = []
     similar_words_list = []
 
-    # TODO: pos=aじゃなくても良いかも。
-    sql = "SELECT `wordid` FROM `word` WHERE `lemma` IN (" + ("%s,"*(len(word_list)))[:-1] + ") AND `pos` = 'a'"
+    sql = "SELECT `wordid` FROM `word` WHERE `lemma` IN (" + ("%s,"*(len(word_list)))[:-1] + ")"
     ex = engine.execute(sql, word_list)
     for row in ex:
         word_id.append(row[0])
 
     if not word_id:
         print("類義語は存在しない")
+        return []
     else:
         sql = "SELECT `synset` FROM `sense` WHERE `wordid` IN (" + ("%s,"*(len(word_id)))[:-1] + ")"
         ex = engine.execute(sql, word_id)
@@ -42,7 +42,7 @@ def get_similar_words(word_list):
 
         sql = "SELECT `lemma` FROM `word`" \
               "WHERE `wordid` IN (SELECT `wordid` FROM `sense` WHERE `synset` IN (" + ("%s,"*(len(synset_list)))[:-1] + "))" \
-              "AND `lang` = 'jpn' AND `pos` = 'a'"
+              "AND `lang` = 'jpn'"
         ex = engine.execute(sql, synset_list)
         for row in ex:
             similar_words_list.append(row[0])

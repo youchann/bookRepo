@@ -21,16 +21,23 @@ const SelectSynonyms: React.FunctionComponent = () => {
 
   React.useEffect(() => {
     const getSynonyms = async () => {
-      setRequesting(true);
-      const res = await client.getSynonyms({ keyword: inputedWord as string }); // MEMO: 前の処理で型を保証済み
-      setSelectedSynonyms(
-        new Set<string>([
-          ...res.data.analyzed_keywords.adjective,
-          ...res.data.analyzed_keywords.noun,
-        ]),
-      );
-      setSynonyms(res.data.similar_words);
-      setRequesting(false);
+      try {
+        setRequesting(true);
+        const res = await client.getSynonyms({
+          keyword: inputedWord as string,
+        }); // MEMO: 前の処理で型を保証済み
+        setSelectedSynonyms(
+          new Set<string>([
+            ...res.data.analyzed_keywords.adjective,
+            ...res.data.analyzed_keywords.noun,
+          ]),
+        );
+        setSynonyms(res.data.similar_words);
+      } catch (e) {
+        setSynonyms([]);
+      } finally {
+        setRequesting(false);
+      }
     };
     getSynonyms();
   }, [inputedWord]);
@@ -52,15 +59,37 @@ const SelectSynonyms: React.FunctionComponent = () => {
     history.push("/selectAdjectiveTopics");
   }
 
+  function handleBack() {
+    history.push("/search");
+  }
+
   return (
     <Spacer pt={10}>
       <Flex display="flex" alignItems="center" flexDirection="column">
         <Typography weight="bold" size="xxxl">
-          あなたが欲しい本と関連の近い単語を選択してください
+          あなたが欲しい本と関連の近い単語をなるべく多く選択してください
         </Typography>
         <Spacer pt={6} />
+        {/* eslint-disable-next-line no-nested-ternary */}
         {requesting ? (
           <Spinner />
+        ) : synonyms.length === 0 ? (
+          <>
+            <Typography
+              size="xxxl"
+              color="secondary"
+              lineHeight="2"
+              align="center"
+            >
+              類義語が見つかりませんでした
+              <br />
+              検索画面からやり直してください
+            </Typography>
+            <Spacer pt={6} />
+            <Button inline onClick={handleBack}>
+              戻る
+            </Button>
+          </>
         ) : (
           <>
             <Styled.CheckboxesContainer>
