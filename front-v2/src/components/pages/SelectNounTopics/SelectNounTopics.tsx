@@ -55,7 +55,7 @@ const SelectNounTopics: React.FunctionComponent = () => {
     <Spacer pt={10}>
       <Flex display="flex" alignItems="center" flexDirection="column">
         <Typography weight="bold" size="xxxl">
-          あなたが欲しい本に近いイメージの単語群を選択してください
+          あなたが欲しい本に近いイメージの単語群をなるべく多く選択してください
         </Typography>
         <Spacer pt={6} />
         {requesting ? (
