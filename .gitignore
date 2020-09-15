@@ -1,6 +1,7 @@
 mysql/data
 mysql/wnjpn.db
 mysql/sqls/wnjpn.mysql.dump
+mysql/sqls/dump.txt
 mysql copy/
 src/production/__pycache__
 src/production/modules/__pycache__
