@@ -4,7 +4,9 @@ from api.modules import nlp, models
 
 @app.route('/')
 def index():
-    return "hello world"
+    return jsonify({
+        "hello world": "hello world"
+    })
 
 
 @app.route('/register_user', methods=['POST'])
