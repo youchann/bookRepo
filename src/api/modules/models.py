@@ -40,8 +40,8 @@ def get_similar_words(word_list):
         for row in ex:
             synset_list.append(row[0])
 
-        sql = "SELECT `lemma` FROM `word`" \
-              "WHERE `wordid` IN (SELECT `wordid` FROM `sense` WHERE `synset` IN (" + ("%s,"*(len(synset_list)))[:-1] + "))" \
+        sql = "SELECT `lemma` FROM `word` " \
+              "WHERE `wordid` IN (SELECT `wordid` FROM `sense` WHERE `synset` IN (" + ("%s,"*(len(synset_list)))[:-1] + ")) " \
               "AND `lang` = 'jpn'"
         ex = engine.execute(sql, synset_list)
         for row in ex:
