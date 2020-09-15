@@ -1,5 +1,5 @@
 build:
   docker:
-    web: Dockerfile
+    web: src/dockerfile
 run:
   web: gunicorn run:app --log-file -
