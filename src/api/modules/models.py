@@ -24,6 +24,7 @@ def get_similar_words(word_list):
     engine = get_engine()
     word_id = []
     synset_list = []
+    similar_word_ids = []
     similar_words_list = []
 
     sql = "SELECT `wordid` FROM `word` WHERE `lemma` IN (" + ("%s,"*(len(word_list)))[:-1] + ")"
@@ -40,10 +41,15 @@ def get_similar_words(word_list):
         for row in ex:
             synset_list.append(row[0])
 
-        sql = "SELECT `lemma` FROM `word` " \
-              "WHERE `wordid` IN (SELECT `wordid` FROM `sense` WHERE `synset` IN (" + ("%s,"*(len(synset_list)))[:-1] + ")) " \
-              "AND `lang` = 'jpn'"
+        sql = "SELECT `wordid` FROM `sense` WHERE `synset` IN (" + ("%s,"*(len(synset_list)))[:-1] + ")"
         ex = engine.execute(sql, synset_list)
+        for row in ex:
+            similar_word_ids.append(row[0])
+
+        sql = "SELECT `lemma` FROM `word` " \
+              "WHERE `wordid` IN (" + ("%s,"*(len(similar_word_ids)))[:-1] + ") " \
+              "AND `lang` = 'jpn'"
+        ex = engine.execute(sql, similar_word_ids)
         for row in ex:
             similar_words_list.append(row[0])
 
