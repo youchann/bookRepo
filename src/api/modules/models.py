@@ -4,10 +4,10 @@ import os
 
 def get_engine():
     url = 'mysql://%s:%s@%s/%s?charset=utf8mb4' % (
-        'root',                # username
-        'root',                # password
-        os.environ['DB_HOST'], # server
-        'test_database'        # db
+        os.environ['DB_USERNAME'],   # username
+        os.environ['DB_PASSWORD'],   # password
+        os.environ['DB_HOST'],       # server
+        os.environ['DB_DATABASE']    # db
     )
     engine = sqlalchemy.create_engine(url, echo=True)
 

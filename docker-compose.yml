@@ -5,7 +5,10 @@ services:
     build: src/.
     tty: true
     environment:
+      DB_USERNAME: root
+      DB_PASSWORD: root
       DB_HOST: db
+      DB_DATABASE: test_database
     volumes:
       - ./src:/src
     ports:
