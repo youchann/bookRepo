@@ -1,1 +1,1 @@
-gunicorn manage:app --log-file=-
+app flask run
