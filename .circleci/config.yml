@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  deploy:
+  deploy_backend:
     machine:
       image: circleci/classic:edge
     steps:
@@ -8,6 +8,11 @@ jobs:
       - run:
           name: Deploy "API" to Heroku
           command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$API_APP_NAME.git master
+  deploy_frontend:
+    machine:
+      image: circleci/classic:edge
+    steps:
+      - checkout
       - run:
           name: Deploy "FRONT" to Heroku
           command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$FRONT_APP_NAME.git master
@@ -15,7 +20,11 @@ workflows:
   version: 2
   deploy:
     jobs:
-      - deploy:
+      - deploy_backend:
+          filters:
+            branches:
+              only: master
+      - deploy_frontend:
           filters:
             branches:
               only: master
