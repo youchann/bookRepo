@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const path = require("path");
 const WebpackBar = require("webpackbar"); // プログレスバーを表示してくれるやつ
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -87,6 +88,11 @@ module.exports = {
     }),
     new ForkTsCheckerWebpackPlugin({
       eslint: true,
+    }),
+    new webpack.DefinePlugin({
+      "process.env.API_URL": JSON.stringify(
+        IS_PRODUCTION ? process.env.API_URL : "http://localhost:5000",
+      ),
     }),
   ],
 };

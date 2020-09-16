@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Response, Request } from "./types";
 
-const baseURL = "http://localhost:5000";
+const baseURL = process.env.API_URL;
 
 const httpClient = axios.create({
   baseURL,
