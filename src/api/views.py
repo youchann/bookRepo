@@ -1,3 +1,4 @@
+import random
 from flask import jsonify, request
 from api import app
 from api.modules import nlp, models
@@ -67,7 +68,7 @@ def show_noun_topics():
     noun_topics = models.get_noun_topics(request.json['selected_keywords'])
 
     return jsonify({
-        "noun_topics": noun_topics
+        "noun_topics": random.sample(noun_topics, len(noun_topics))
     })
 
 
