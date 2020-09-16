@@ -16,12 +16,6 @@ export const client = {
     httpClient.post<Response.RegisterUser>("/register_user", params),
   getSynonyms: (params: Request.Search) =>
     httpClient.get<Response.Search>("/search", { params }),
-  getAdjectiveTopics: (params: Request.ShowAdjectiveTopics) =>
-    httpClient.post<Response.ShowAdjectiveTopics>("/show_adjective_topics", {
-      ...params,
-      noun: [],
-      adjective: [],
-    }),
   getNounTopics: (params: Request.ShowNounTopics) =>
     httpClient.post<Response.ShowNounTopics>("/show_noun_topics", params),
   getBooks: (params: Request.GetBooks) =>

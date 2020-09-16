@@ -56,7 +56,7 @@ const SelectSynonyms: React.FunctionComponent = () => {
     const synonymsArray: string[] = [];
     selectedSynonyms.forEach((synonym) => synonymsArray.push(synonym));
     addSelectedWords(synonymsArray);
-    history.push("/selectAdjectiveTopics");
+    history.push("/selectNounTopics");
   }
 
   function handleBack() {

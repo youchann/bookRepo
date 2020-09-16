@@ -18,11 +18,6 @@ export namespace Response {
     similar_words: string[];
   }
 
-  export interface ShowAdjectiveTopics {
-    // NOTE: [book_id: number, words: strng[]][]
-    adjective_topics: [number, string[]][];
-  }
-
   export interface ShowNounTopics {
     // NOTE: [book_id: number, words: strng[]][]
     noun_topics: [number, string[]][];
@@ -53,14 +48,8 @@ export namespace Request {
     keyword: string;
   }
 
-  export interface ShowAdjectiveTopics {
-    noun: string[];
-    adjective: string[];
-    selected_keywords: string[];
-  }
-
   export interface ShowNounTopics {
-    book_ids: number[];
+    selected_keywords: string[];    
   }
 
   export interface GetBooks {

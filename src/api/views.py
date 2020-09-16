@@ -54,38 +54,17 @@ def suggest_keyword():
     })
 
 
-@app.route('/show_adjective_topics', methods=['POST'])
-def show_adjective_topics():
+@app.route('/show_noun_topics', methods=['POST'])
+def show_noun_topics():
     # 想定しているJSON
     # {
-    #     "noun": ["集合"],
-    #     "adjective": ["すごい", "はやい"],
     #     "selected_keywords": ["えぐい", "しゅごい", "魂", "小説"]
     # }
     # if request.headers['Content-Type'] != 'application/json':
     #     print(request.headers['Content-Type'])
     #     return jsonify(res='error'), 400
 
-    data_json = nlp.separate_selected_keywords(request.json)
-
-    adjective_topics = models.get_adjective_topics(data_json['noun'], data_json['adjective'])
-
-    return jsonify({
-        "adjective_topics": adjective_topics
-    })
-
-
-@app.route('/show_noun_topics', methods=['POST'])
-def show_noun_topics():
-    # 想定しているJSON
-    # {
-    #     "book_ids": [1231412412,1241421,12113413,423412413],
-    # }
-    # if request.headers['Content-Type'] != 'application/json':
-    #     print(request.headers['Content-Type'])
-    #     return jsonify(res='error'), 400
-
-    noun_topics = models.get_noun_topics(request.json['book_ids'])
+    noun_topics = models.get_noun_topics(request.json['selected_keywords'])
 
     return jsonify({
         "noun_topics": noun_topics
