@@ -10,6 +10,8 @@ const httpClient = axios.create({
 
 export const client = {
   sample: () => httpClient.get<Response.Sample>("/"),
+  getSuggestKeywords: () =>
+    httpClient.get<Response.SuggestKeywords>("/suggest_keyword"),
   registerUser: (params: Request.RegisterUser) =>
     httpClient.post<Response.RegisterUser>("/register_user", params),
   getSynonyms: (params: Request.Search) =>

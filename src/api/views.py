@@ -47,6 +47,13 @@ def search():
     })
 
 
+@app.route('/suggest_keyword')
+def suggest_keyword():
+    return jsonify({
+        "keywords": models.get_suggest_keyword(),
+    })
+
+
 @app.route('/show_adjective_topics', methods=['POST'])
 def show_adjective_topics():
     # 想定しているJSON

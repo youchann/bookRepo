@@ -2,6 +2,9 @@
 export namespace Response {
   export interface Sample {};
 
+  export interface SuggestKeywords {
+    keywords: string[];
+  }
   export interface RegisterUser {
     id: number;
     student_number: number;

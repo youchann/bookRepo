@@ -1,3 +1,4 @@
+import random
 import sqlalchemy
 from pprint import pprint
 import os
@@ -19,6 +20,18 @@ def register_user(student_number):
     sql = "INSERT INTO users(student_number) VALUES (%s)"
     ex = engine.execute(sql, [student_number])
     return ex.lastrowid
+
+def get_suggest_keyword():
+    engine = get_engine()
+    word_list = []
+
+    sql = "SELECT `word` from `words`"
+    ex = engine.execute(sql)
+
+    for row in ex:
+        word_list.append(row[0])
+
+    return random.sample(word_list, 100)
 
 def get_similar_words(word_list):
     engine = get_engine()
