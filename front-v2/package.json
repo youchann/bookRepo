@@ -4,9 +4,9 @@
   "author": "yutaro1031 <40020812+yutaro1031@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --mode development",
-    "dev-server": "node ./server/index.js",
+    "start": "node ./server/index.js",
     "build": "webpack --mode=production",
+    "dev": "webpack-dev-server --mode development",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "lint:fix": "yarn lint --fix"
   },
