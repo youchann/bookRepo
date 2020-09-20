@@ -14,9 +14,11 @@ const SelectNounTopics: React.FunctionComponent = () => {
   const [topics, setTopic] = React.useState<
     Response.ShowNounTopics["noun_topics"]
   >([]);
-  const [selectedIndex, setSelectedIndex] = React.useState<Set<number>>(
+  const [selectedIndexes, setSelectedIndexes] = React.useState<Set<number>>(
     new Set<number>(),
   );
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+  const [reflectedIndex, setRefrectedIndex] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     const getTopics = async () => {
@@ -30,21 +32,27 @@ const SelectNounTopics: React.FunctionComponent = () => {
     getTopics();
   }, [selectedWords]);
 
-  const createHandleSelect = (index: number) => {
-    return function () {
-      const newSet = new Set(selectedIndex);
-      if (selectedIndex.has(index)) {
-        newSet.delete(index);
-      } else {
-        newSet.add(index);
-      }
-      setSelectedIndex(newSet);
-    };
-  };
+  React.useEffect(() => {
+    if (activeIndex === null || reflectedIndex) return;
+    const newSet = new Set(selectedIndexes);
+    if (selectedIndexes.has(activeIndex)) {
+      newSet.delete(activeIndex);
+    } else {
+      newSet.add(activeIndex);
+    }
+    setSelectedIndexes(newSet);
+    setRefrectedIndex(true);
+  }, [reflectedIndex]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // MEMO: <TopicCard />の再レンダリングを防ぐために複雑な実装となっている
+  const handleSelectIndex = React.useCallback((index: number) => {
+    setActiveIndex(index);
+    setRefrectedIndex(false);
+  }, []);
 
   function handleClickButton() {
     const bookIds: number[] = [];
-    selectedIndex.forEach((index) => bookIds.push(topics[index][0]));
+    selectedIndexes.forEach((index) => bookIds.push(topics[index][0]));
     history.push(`/selectBooks?book_ids=${bookIds.join(",")}`);
   }
 
@@ -62,9 +70,9 @@ const SelectNounTopics: React.FunctionComponent = () => {
             // eslint-disable-next-line react/no-array-index-key
             <Spacer key={index} py={2}>
               <TopicCard
-                checked={selectedIndex.has(index)}
+                index={index}
                 words={topic[1]}
-                onClick={createHandleSelect(index)}
+                onClick={handleSelectIndex}
               />
             </Spacer>
           ))
@@ -72,7 +80,7 @@ const SelectNounTopics: React.FunctionComponent = () => {
         <Spacer pt={6} />
         <Button
           inline
-          disabled={selectedIndex.size === 0}
+          disabled={selectedIndexes.size === 0}
           onClick={handleClickButton}
         >
           決定
