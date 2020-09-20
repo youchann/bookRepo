@@ -1,6 +1,7 @@
 import React from "react";
 import * as Styled from "./styled";
 import { Typography } from "ingred-ui";
+import { ErrorBoundary } from "../../boundaries/ErrorBoundary";
 
 const RootContainer: React.FunctionComponent = ({ children }) => {
   return (
@@ -10,7 +11,9 @@ const RootContainer: React.FunctionComponent = ({ children }) => {
           いい感じに本を探すやつ
         </Typography>
       </Styled.Header>
-      <Styled.Content>{children}</Styled.Content>
+      <ErrorBoundary>
+        <Styled.Content>{children}</Styled.Content>
+      </ErrorBoundary>
     </Styled.Container>
   );
 };
