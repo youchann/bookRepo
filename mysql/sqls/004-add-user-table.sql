@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS `search_words`;
 create table IF not exists `search_words`
 (
  `id`               INT(20) NOT NULL AUTO_INCREMENT,
- `word`             VARCHAR(100) NOT NULL,
+ `word`             TEXT NOT NULL,
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8;
 
