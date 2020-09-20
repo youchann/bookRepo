@@ -17,7 +17,7 @@ def register_user():
     #     "student_number": 12345678,
     # }
 
-    student_number = request.json["student_number"]
+    student_number = request.json['data']["student_number"]
     if type(student_number) is not int:
         return jsonify({
             'message': 'student_numberは数値ではありません'
@@ -43,8 +43,7 @@ def show_noun_topics():
     # {
     #     "inputed_word": "感動 小説 最高"
     # }
-
-    keyword = request.json['inputed_word']
+    keyword = request.json['data']['inputed_word']
 
     if (type(keyword) is not str):
         return jsonify({
@@ -75,7 +74,7 @@ def get_isbn_from_book_ids():
     #     "book_ids": [1231412412,1241421,12113413,423412413],
     # }
 
-    isbn_list = models.get_isbn_from_book_ids(request.json['book_ids'])
+    isbn_list = models.get_isbn_from_book_ids(request.json['data']['book_ids'])
 
     return jsonify({
         "isbn_list": isbn_list
@@ -89,7 +88,7 @@ def get_info_from_book_ids():
     #     "book_ids": [1231412412,1241421,12113413,423412413],
     # }
 
-    info_list = models.get_info_from_book_ids(request.json['book_ids'])
+    info_list = models.get_info_from_book_ids(request.json['data']['book_ids'])
     return jsonify({
         "info_list": info_list
     })
@@ -101,8 +100,8 @@ def register_book_ids():
     #     "user_id": 1,
     #     "book_ids": [1231412412,1241421,12113413,423412413],
     # }
-    user_id = request.json["user_id"]
-    book_ids = request.json["book_ids"]
+    user_id = request.json['data']["user_id"]
+    book_ids = request.json['data']["book_ids"]
     if (not type(user_id) is int or not book_ids):
         return jsonify({
             'message': 'リクエストの形式または型が正しくありません。'
@@ -138,8 +137,8 @@ def save_evaluation_data():
     #     "user_id": 1
     # }
 
-    evaluation_data = request.json['evaluation_data']
-    user_id = request.json['user_id']
+    evaluation_data = request.json['data']['evaluation_data']
+    user_id = request.json['data']['user_id']
 
     if (not type(user_id) is int or not evaluation_data):
         return jsonify({

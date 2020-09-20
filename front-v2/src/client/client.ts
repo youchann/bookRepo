@@ -13,15 +13,19 @@ export const client = {
   getSuggestKeywords: () =>
     httpClient.get<Response.SuggestKeywords>("/suggest_keyword"),
   registerUser: (params: Request.RegisterUser) =>
-    httpClient.post<Response.RegisterUser>("/register_user", params),
+    httpClient.post<Response.RegisterUser>("/register_user", {
+      data: params,
+    }),
   getNounTopics: (params: Request.ShowNounTopics) =>
-    httpClient.post<Response.ShowNounTopics>("/show_noun_topics", params),
+    httpClient.post<Response.ShowNounTopics>("/show_noun_topics", {
+      data: params,
+    }),
   getBooks: (params: Request.GetBooks) =>
-    httpClient.post("/get_info_from_book_ids", params),
+    httpClient.post("/get_info_from_book_ids", { data: params }),
   registerBookIds: (params: Request.RegisterBookIds) =>
-    httpClient.post("/register_book_ids", params),
+    httpClient.post("/register_book_ids", { data: params }),
   getEvaluationItems: () =>
     httpClient.get<Response.EvaluationItems>("/get_evaluation_data"),
   saveEvaluationData: (params: Request.SaveEvaluationData) =>
-    httpClient.post("/save_evaluation_data", params),
+    httpClient.post("/save_evaluation_data", { data: params }),
 };
