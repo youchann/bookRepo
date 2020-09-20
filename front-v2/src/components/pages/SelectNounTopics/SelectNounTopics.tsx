@@ -47,10 +47,9 @@ const SelectNounTopics: React.FunctionComponent = () => {
   };
 
   function handleClickButton() {
-    // TODO: 重複する可能性があるので、Setで管理してArrayを生成する
-    const bookIds: number[] = [];
-    selectedIndex.forEach((index) => bookIds.push(topics[index][0]));
-    history.push(`/selectBooks?book_ids=${bookIds.join(",")}`);
+    const bookIds: Set<number> = new Set([]);
+    selectedIndex.forEach((index) => bookIds.add(topics[index][0]));
+    history.push(`/selectBooks?book_ids=${Array.from(bookIds).join(",")}`);
   }
 
   return (
