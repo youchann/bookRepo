@@ -31,8 +31,8 @@ const Search: React.FunctionComponent = () => {
   }, []);
 
   const nextPage = () => {
-    // eslint-disable-next-line no-irregular-whitespace
-    history.push(`/selectNounTopics?word=${text.replace(/\s+/g, "|")}`);
+    // MEMO: スペースだとサーバーサイドで正規化時に意図通りの形態素解析ができないので「|」で区切る
+    history.push(`/selectNounTopics?word=${text.replace(/\s+/g, "|")}`); // eslint-disable-line no-irregular-whitespace
   };
 
   function handleChangeInput(event: React.ChangeEvent<HTMLInputElement>) {
