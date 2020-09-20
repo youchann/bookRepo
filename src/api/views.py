@@ -29,24 +29,6 @@ def register_user():
         "id": user_id 
     })
 
-@app.route('/search')
-def search():
-    keyword = request.args.get('keyword')
-    models.save_searched_word(keyword)
-    word_list = nlp.analyze_text(keyword)
-
-    if (not word_list["adjective"] and not word_list["noun"]):
-        return jsonify({
-            'message': '形容詞または名詞が見つかりませんでした'
-        }), 500
-
-    similar_word_list = models.get_similar_words(word_list["adjective"] + word_list["noun"])
-
-    return jsonify({
-        "analyzed_keywords": word_list,
-        "similar_words": similar_word_list,
-    })
-
 
 @app.route('/suggest_keyword')
 def suggest_keyword():
@@ -59,13 +41,27 @@ def suggest_keyword():
 def show_noun_topics():
     # 想定しているJSON
     # {
-    #     "selected_keywords": ["えぐい", "しゅごい", "魂", "小説"]
+    #     "inputed_word": "感動 小説 最高"
     # }
-    # if request.headers['Content-Type'] != 'application/json':
-    #     print(request.headers['Content-Type'])
-    #     return jsonify(res='error'), 400
 
-    noun_topics = models.get_noun_topics(request.json['selected_keywords'])
+    keyword = request.json['inputed_word']
+
+    if (type(keyword) is not str):
+        return jsonify({
+            'message': 'リクエストの形式が正しくありません'
+        }), 500
+
+    models.save_searched_word(keyword)
+    word_list = nlp.analyze_text(keyword)
+
+    if (not word_list["adjective"] and not word_list["noun"]):
+        return jsonify({
+            'message': '形容詞または名詞が見つかりませんでした'
+        }), 500
+
+    similar_word_list = models.get_similar_words(word_list["adjective"] + word_list["noun"])
+
+    noun_topics = models.get_noun_topics(word_list["adjective"] + word_list["noun"] + similar_word_list)
 
     return jsonify({
         "noun_topics": random.sample(noun_topics, len(noun_topics))
@@ -78,9 +74,6 @@ def get_isbn_from_book_ids():
     # {
     #     "book_ids": [1231412412,1241421,12113413,423412413],
     # }
-    # if request.headers['Content-Type'] != 'application/json':
-    #     print(request.headers['Content-Type'])
-    #     return jsonify(res='error'), 400
 
     isbn_list = models.get_isbn_from_book_ids(request.json['book_ids'])
 
@@ -95,9 +88,6 @@ def get_info_from_book_ids():
     # {
     #     "book_ids": [1231412412,1241421,12113413,423412413],
     # }
-    # if request.headers['Content-Type'] != 'application/json':
-    #     print(request.headers['Content-Type'])
-    #     return jsonify(res='error'), 400
 
     info_list = models.get_info_from_book_ids(request.json['book_ids'])
     return jsonify({
@@ -144,11 +134,9 @@ def save_evaluation_data():
     #             "evaluation": 4,
     #         },
     #         ...
-    #     ]
+    #     ],
+    #     "user_id": 1
     # }
-    # if request.headers['Content-Type'] != 'application/json':
-    #     print(request.headers['Content-Type'])
-    #     return jsonify(res='error'), 400
 
     evaluation_data = request.json['evaluation_data']
     user_id = request.json['user_id']

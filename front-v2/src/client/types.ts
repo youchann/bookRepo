@@ -10,14 +10,6 @@ export namespace Response {
     student_number: number;
   }
 
-  export interface Search {
-    analyzed_keywords: {
-      adjective: string[];
-      noun: string[];
-    };
-    similar_words: string[];
-  }
-
   export interface ShowNounTopics {
     // NOTE: [book_id: number, words: strng[]][]
     noun_topics: [number, string[]][];
@@ -44,12 +36,8 @@ export namespace Request {
     student_number: number;
   }
 
-  export interface Search {
-    keyword: string;
-  }
-
   export interface ShowNounTopics {
-    selected_keywords: string[];    
+    inputed_word: string;    
   }
 
   export interface GetBooks {

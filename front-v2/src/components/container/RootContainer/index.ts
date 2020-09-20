@@ -1,1 +1,1 @@
-export { RootContainer, RootContext } from "./RootContainer";
+export { RootContainer } from "./RootContainer";

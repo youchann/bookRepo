@@ -31,7 +31,7 @@ const Search: React.FunctionComponent = () => {
   }, []);
 
   const nextPage = () => {
-    history.push(`/selectSynonyms?word=${text}`);
+    history.push(`/selectNounTopics?word=${text}`);
   };
 
   function handleChangeInput(event: React.ChangeEvent<HTMLInputElement>) {

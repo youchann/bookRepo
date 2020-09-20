@@ -1,1 +1,0 @@
-export { SelectSynonyms } from "./SelectSynonyms";
