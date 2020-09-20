@@ -31,7 +31,8 @@ const Search: React.FunctionComponent = () => {
   }, []);
 
   const nextPage = () => {
-    history.push(`/selectNounTopics?word=${text}`);
+    // eslint-disable-next-line no-irregular-whitespace
+    history.push(`/selectNounTopics?word=${text.replace(/\s+/g, "|")}`);
   };
 
   function handleChangeInput(event: React.ChangeEvent<HTMLInputElement>) {
