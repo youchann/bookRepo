@@ -5,9 +5,11 @@ import { Spacer, Flex, Typography, Spinner, Button } from "ingred-ui";
 import { Response } from "../../../client/types";
 import { client } from "../../../client";
 import { TopicCard } from "../../elements/TopicCard";
+import { useConfirmUser } from "../../../hooks/useConfirmUser";
 
 const SelectNounTopics: React.FunctionComponent = () => {
   const history = useHistory();
+  useConfirmUser(history);
 
   const parsed = queryString.parse(location.search);
   const inputedWord = parsed["word"] as string;

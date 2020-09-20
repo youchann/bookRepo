@@ -10,13 +10,13 @@ import { useConfirmUser } from "../../../hooks/useConfirmUser";
 
 const SelectBooks: React.FunctionComponent = () => {
   const history = useHistory();
+  useConfirmUser(history);
+
   const [requesting, setRequesting] = React.useState<boolean>(false);
   const [books, setBooks] = React.useState<Response.GetBooks["info_list"]>([]);
   const [selectedBookIds, setSelectedBookIds] = React.useState<Set<number>>(
     new Set<number>(),
   );
-
-  useConfirmUser(history);
 
   React.useEffect(() => {
     const parsedParam = queryString.parse(location.search.slice(1), {

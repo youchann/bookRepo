@@ -12,10 +12,13 @@ import {
 } from "ingred-ui";
 import { useHistory } from "react-router";
 import { client } from "../../../client";
+import { useConfirmUser } from "../../../hooks/useConfirmUser";
 
 const Search: React.FunctionComponent = () => {
   const theme = useTheme();
   const history = useHistory();
+  useConfirmUser(history);
+
   const [text, setText] = React.useState<string>("");
   const [requesting, setRequesting] = React.useState<boolean>(false);
   const [keywords, setKeywords] = React.useState<string[]>([]);

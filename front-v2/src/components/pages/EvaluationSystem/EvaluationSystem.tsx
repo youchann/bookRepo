@@ -13,6 +13,8 @@ type EvaluationData = {
 
 const EvaluationSystem: React.FunctionComponent = () => {
   const history = useHistory();
+  useConfirmUser(history);
+
   const [requesting, setRequesting] = React.useState<boolean>(false);
   const [evaluationItems, setEvaluationItems] = React.useState<
     Response.EvaluationItems["evaluation_list"]
@@ -20,8 +22,6 @@ const EvaluationSystem: React.FunctionComponent = () => {
   const [evaluationData, setEvaluationData] = React.useState<EvaluationData>(
     {},
   );
-
-  useConfirmUser(history);
 
   React.useEffect(() => {
     const getEvaluationItems = async () => {
