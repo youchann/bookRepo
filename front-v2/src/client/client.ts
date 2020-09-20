@@ -14,8 +14,6 @@ export const client = {
     httpClient.get<Response.SuggestKeywords>("/suggest_keyword"),
   registerUser: (params: Request.RegisterUser) =>
     httpClient.post<Response.RegisterUser>("/register_user", params),
-  getSynonyms: (params: Request.Search) =>
-    httpClient.get<Response.Search>("/search", { params }),
   getNounTopics: (params: Request.ShowNounTopics) =>
     httpClient.post<Response.ShowNounTopics>("/show_noun_topics", params),
   getBooks: (params: Request.GetBooks) =>

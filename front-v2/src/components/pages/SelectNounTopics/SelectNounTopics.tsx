@@ -1,14 +1,18 @@
 import React from "react";
+import * as queryString from "query-string";
 import { useHistory } from "react-router";
 import { Spacer, Flex, Typography, Spinner, Button } from "ingred-ui";
 import { Response } from "../../../client/types";
 import { client } from "../../../client";
 import { TopicCard } from "../../elements/TopicCard";
-import { RootContext } from "../../container/RootContainer";
 
 const SelectNounTopics: React.FunctionComponent = () => {
   const history = useHistory();
-  const { selectedWords } = React.useContext(RootContext);
+
+  const parsed = queryString.parse(location.search);
+  const inputedWord = parsed["word"] as string;
+  if (typeof inputedWord !== "string") history.replace("/");
+
   const [requesting, setRequesting] = React.useState<boolean>(false);
   // NOTE: [book_id: number, words: string[]][]
   const [topics, setTopic] = React.useState<
@@ -22,13 +26,13 @@ const SelectNounTopics: React.FunctionComponent = () => {
     const getTopics = async () => {
       setRequesting(true);
       const res = await client.getNounTopics({
-        selected_keywords: selectedWords,
+        inputed_word: inputedWord,
       });
       setTopic(res.data.noun_topics);
       setRequesting(false);
     };
     getTopics();
-  }, [selectedWords]);
+  }, [inputedWord]);
 
   const createHandleSelect = (index: number) => {
     return function () {
@@ -43,6 +47,7 @@ const SelectNounTopics: React.FunctionComponent = () => {
   };
 
   function handleClickButton() {
+    // TODO: 重複する可能性があるので、Setで管理してArrayを生成する
     const bookIds: number[] = [];
     selectedIndex.forEach((index) => bookIds.push(topics[index][0]));
     history.push(`/selectBooks?book_ids=${bookIds.join(",")}`);
