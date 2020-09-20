@@ -20,12 +20,13 @@ const Search: React.FunctionComponent = () => {
   const [requesting, setRequesting] = React.useState<boolean>(false);
   const [keywords, setKeywords] = React.useState<string[]>([]);
 
+  const getSuggestKeywords = async () => {
+    setRequesting(true);
+    setKeywords((await client.getSuggestKeywords()).data.keywords);
+    setRequesting(false);
+  };
+
   React.useEffect(() => {
-    const getSuggestKeywords = async () => {
-      setRequesting(true);
-      setKeywords((await client.getSuggestKeywords()).data.keywords);
-      setRequesting(false);
-    };
     getSuggestKeywords();
   }, []);
 
@@ -53,6 +54,10 @@ const Search: React.FunctionComponent = () => {
     };
   };
 
+  function handleClickReload() {
+    getSuggestKeywords();
+  }
+
   return (
     <>
       <Spacer pt={10} />
@@ -73,33 +78,35 @@ const Search: React.FunctionComponent = () => {
             onKeyPress={handleEnter}
           />
         </Styled.InputContainer>
+        <Spacer pt={4} />
+        <Flex display="flex" justifyContent="center" alignItems="center">
+          <Typography weight="bold" size="xxl" color="secondary">
+            下記の単語群からも入力可能です
+          </Typography>
+          <Spacer pl={2} />
+          <ActionButton icon="search" onClick={handleClickReload}>
+            再読み込み
+          </ActionButton>
+        </Flex>
+        <Spacer pt={3} />
         {requesting ? (
           <Spinner />
         ) : (
-          <Spacer py={4}>
-            <Typography
-              weight="bold"
-              size="xxl"
-              align="center"
-              color="secondary"
-            >
-              下記の単語群からも入力可能です
-            </Typography>
-            <Spacer pt={3} />
-            <Styled.KeywordsContainer>
-              {keywords.map((keyword) => (
-                <Spacer key={keyword} p={1}>
-                  <Styled.Button onClick={handleClickKeyword(keyword)}>
-                    <Typography>{keyword}</Typography>
-                  </Styled.Button>
-                </Spacer>
-              ))}
-            </Styled.KeywordsContainer>
-          </Spacer>
+          <Styled.KeywordsContainer>
+            {keywords.map((keyword) => (
+              <Spacer key={keyword} p={1}>
+                <Styled.Button onClick={handleClickKeyword(keyword)}>
+                  <Typography>{keyword}</Typography>
+                </Styled.Button>
+              </Spacer>
+            ))}
+          </Styled.KeywordsContainer>
         )}
-        <Button inline onClick={handleClickButton}>
+        <Spacer py={2} />
+        <Button inline disabled={text === ""} onClick={handleClickButton}>
           決定
         </Button>
+        <Spacer pt={3} />
       </Flex>
     </>
   );
