@@ -134,7 +134,8 @@ def save_evaluation_data():
     #             "evaluation": 4,
     #         },
     #         ...
-    #     ]
+    #     ],
+    #     "user_id": 1
     # }
 
     evaluation_data = request.json['evaluation_data']
