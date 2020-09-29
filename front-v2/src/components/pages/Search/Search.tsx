@@ -12,12 +12,10 @@ import {
 } from "ingred-ui";
 import { useHistory } from "react-router";
 import { client } from "../../../client";
-import { useConfirmUser } from "../../../hooks/useConfirmUser";
 
 const Search: React.FunctionComponent = () => {
   const theme = useTheme();
   const history = useHistory();
-  useConfirmUser(history);
 
   const [text, setText] = React.useState<string>("");
   const [requesting, setRequesting] = React.useState<boolean>(false);
@@ -31,6 +29,13 @@ const Search: React.FunctionComponent = () => {
 
   React.useEffect(() => {
     getSuggestKeywords();
+    const userId = localStorage.getItem("userId");
+    if (userId === null || isNaN(+userId)) {
+      (async () => {
+        const res = await client.registerUser();
+        localStorage.setItem("userId", `${res.data.id}`);
+      })();
+    }
   }, []);
 
   const nextPage = () => {

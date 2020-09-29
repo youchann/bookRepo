@@ -12,10 +12,7 @@ export const client = {
   sample: () => httpClient.get<Response.Sample>("/"),
   getSuggestKeywords: () =>
     httpClient.get<Response.SuggestKeywords>("/suggest_keyword"),
-  registerUser: (params: Request.RegisterUser) =>
-    httpClient.post<Response.RegisterUser>("/register_user", {
-      data: params,
-    }),
+  registerUser: () => httpClient.post<Response.RegisterUser>("/register_user"),
   getNounTopics: (params: Request.ShowNounTopics) =>
     httpClient.post<Response.ShowNounTopics>("/show_noun_topics", {
       data: params,

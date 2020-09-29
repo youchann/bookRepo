@@ -14,9 +14,7 @@ def index():
 def register_user():
     # 想定しているJSON
     # {}
-
-    user_id = models.register_user(student_number)
-
+    user_id = models.register_user()
     return jsonify({
         "id": user_id 
     })
