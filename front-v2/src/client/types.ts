@@ -7,7 +7,6 @@ export namespace Response {
   }
   export interface RegisterUser {
     id: number;
-    student_number: number;
   }
 
   export interface ShowNounTopics {
@@ -32,10 +31,6 @@ export namespace Response {
 }
 
 export namespace Request {
-  export interface RegisterUser {
-    student_number: number;
-  }
-
   export interface ShowNounTopics {
     inputed_word: string;    
   }

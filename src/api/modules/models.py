@@ -15,10 +15,10 @@ def get_engine():
     return engine
 
 
-def register_user(student_number):
+def register_user():
     engine = get_engine()
-    sql = "INSERT INTO users(student_number) VALUES (%s)"
-    ex = engine.execute(sql, [student_number])
+    sql = "INSERT INTO users(student_number) VALUES (0)"
+    ex = engine.execute(sql, [])
     return ex.lastrowid
 
 def get_suggest_keyword():

@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as ReactRouter, Switch, Route } from "react-router-dom";
-import { Home } from "../components/pages/Home";
 import { Search } from "../components/pages/Search";
 import { SelectNounTopics } from "../components/pages/SelectNounTopics";
 import { SelectBooks } from "../components/pages/SelectBooks";
@@ -11,8 +10,7 @@ const Router: React.FunctionComponent = () => {
   return (
     <ReactRouter>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/search" component={Search} />
+        <Route exact path="/" component={Search} />
         <Route exact path="/selectNounTopics" component={SelectNounTopics} />
         <Route exact path="/selectBooks" component={SelectBooks} />
         <Route exact path="/evaluationSystem" component={EvaluationSystem} />
