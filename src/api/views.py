@@ -13,15 +13,7 @@ def index():
 @app.route('/register_user', methods=['POST'])
 def register_user():
     # 想定しているJSON
-    # {
-    #     "student_number": 12345678,
-    # }
-
-    student_number = request.json['data']["student_number"]
-    if type(student_number) is not int:
-        return jsonify({
-            'message': 'student_numberは数値ではありません'
-        }), 500
+    # {}
 
     user_id = models.register_user(student_number)
 
