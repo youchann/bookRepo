@@ -66,6 +66,8 @@ const SelectBooks: React.FunctionComponent = () => {
           興味を持った本を選択してください
           <br />
           ※タイトルのリンクからあらすじを参照できます
+          <br />
+          ※興味を持った本が無い場合はそのまま「決定」をクリックしてください
         </Typography>
         <Spacer pt={6} />
         {requesting ? (
