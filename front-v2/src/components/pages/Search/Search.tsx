@@ -74,8 +74,16 @@ const Search: React.FunctionComponent = () => {
         <Typography weight="bold" size="xxxl">
           あなたの欲しい本に近しいキーワードをなるべく多く入力してください
         </Typography>
-        <Typography weight="bold" size="xxl" color={theme.palette.danger.main}>
-          ※１つ以上の名詞または形容詞を含めるようにしてください
+        <Spacer pt={1} />
+        <Typography
+          weight="bold"
+          size="xxl"
+          color={theme.palette.danger.main}
+          align="center"
+        >
+          ※１つ以上の名詞または形容詞を含めるようにしてください。
+          <br />
+          ※なお、推薦可能な書籍のジャンルは小説またはビジネス書のみとなります。
         </Typography>
         <Spacer pt={6} />
         <Styled.InputContainer>
