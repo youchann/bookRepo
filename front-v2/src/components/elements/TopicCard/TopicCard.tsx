@@ -13,9 +13,9 @@ const TopicCard: React.FunctionComponent<Props> = ({
   checked,
   onClick,
 }) => (
-  <Styled.Card checked={checked} onClick={onClick}>
+  <Styled.Card checked={checked}>
     <Spacer pt={0.5} px={2}>
-      <Checkbox checked={checked} />
+      <Checkbox checked={checked} onClick={onClick} />
     </Spacer>
     <Flex display="flex" flexWrap="wrap">
       {words.map((word) => (
