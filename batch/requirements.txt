@@ -26,7 +26,7 @@ smart-open==1.8.2
 soupsieve==1.9.1
 unattended-upgrades==0.1
 urllib3==1.24.2
-Werkzeug==0.15.2
+Werkzeug==0.15.3
 sqlalchemy
 sqlalchemy_utils
 pymysql
